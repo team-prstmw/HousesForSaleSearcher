@@ -15,6 +15,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 
+import { signUp } from '/src/utils/auth';
+
+// import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
@@ -41,7 +46,7 @@ function RegisterForm(props) {
   };
 
   const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+    signUp(data.email, data.password);
   };
   return (
     <Box
@@ -57,7 +62,7 @@ function RegisterForm(props) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3} sx={{ alignItems: 'center' }}>
           <Controller
-            name="Name"
+            name="name"
             control={control}
             defaultValue=""
             rules={{ required: true }}
@@ -79,7 +84,7 @@ function RegisterForm(props) {
             )}
           />
           <Controller
-            name="E-mail"
+            name="email"
             control={control}
             defaultValue=""
             className="materialUIInput"
@@ -113,27 +118,25 @@ function RegisterForm(props) {
             defaultValue=""
             className="materialUIInput"
             rules={{ required: true, minLength: 8 }}
+            // helperText="At least 8 characters"
             render={({ field }) => (
-              <FormControl
-                sx={{ m: 1, helperText: 'At least 8 characters' }}
-                variant="outlined"
-                // helperText="At least 8 characters"
-              >
+              <FormControl sx={{ m: 1, helperText: 'At least 8 characters' }} variant="outlined">
+                {/* <> */}
                 <InputLabel required htmlFor="outlined-adornment-password">
                   Password
                 </InputLabel>
                 <OutlinedInput
-                  // helperText="At least 8 characters"
                   id="outlined-adornment-password"
                   type={values.showPassword ? 'text' : 'password'}
                   value={values.password}
                   onChange={handleChange('password')}
                   placeholder="Password"
-                  autoComplete="new-password"
+                  // autoComplete="new-password"
                   sx={{
                     width: 327,
                     height: 55,
                   }}
+                  {...field}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -149,12 +152,15 @@ function RegisterForm(props) {
                   label="Password"
                 />
               </FormControl>
+              // </>
             )}
           />
+          {/* <input type="submit" /> */}
           <Button
             color="primary"
             type="submit"
             variant="contained"
+            onClick={handleSubmit(onSubmit)}
             sx={{
               width: 224,
               height: 36,
