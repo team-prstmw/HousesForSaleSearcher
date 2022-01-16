@@ -1,20 +1,20 @@
 import './App.css';
 
-import { Route, Router, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <div className="App">
-        <Switch>
-          <Route path="/register" component={RegisterPage} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/" component={IndexPage} />
-          <Route path="/user" component={UserPage} />
-          <Route path="/addhouse" component={AddHousePage} />
-        </Switch>
+        <Routes>
+          <Route path="/register" element={<h1>REGISTER PAGE</h1>} />
+          <Route path="/" element={<h1>INDEX PAGE</h1>} />
+          <Route path="/login" element={<h1>LOGIN PAGE</h1>} />
+          <Route path="/user" element={<h1>USER PAGE</h1>} />
+          <Route path="/addhouse" element={<h1>ADD_HOUSE PAGE</h1>} />
+        </Routes>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
