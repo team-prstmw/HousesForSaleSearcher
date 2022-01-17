@@ -1,0 +1,21 @@
+.shp-container {
+  margin: auto;
+  max-width: fit-content;
+  display: flex;
+}
+
+.shp-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 0;
+  margin: 20px auto;
+  max-width: max-content;
+}
+
+.shp-header {
+  max-width: max-content;
+  display: inline-flex;
+  margin: auto;
+  color: #30336b;
+}
