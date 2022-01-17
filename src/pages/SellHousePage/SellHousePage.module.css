@@ -1,10 +1,10 @@
-.shp-container {
+.shpContainer {
   margin: auto;
   max-width: fit-content;
   display: flex;
 }
 
-.shp-content {
+.shpContent {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,7 +13,7 @@
   max-width: max-content;
 }
 
-.shp-header {
+.shpHeader {
   max-width: max-content;
   display: inline-flex;
   margin: auto;

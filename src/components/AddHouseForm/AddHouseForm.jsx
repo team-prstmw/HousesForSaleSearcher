@@ -1,5 +1,3 @@
-import './AddHouseForm.css';
-
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -17,6 +15,8 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
 
+import styles from './AddHouseForm.module.css';
+
 const AddHouseForm = () => {
   const [moreFacilities, setMoreFacilities] = useState(false);
   const [images, setImages] = useState();
@@ -27,13 +27,13 @@ const AddHouseForm = () => {
 
   const removeImage = (name) => setImages((prevState) => prevState?.filter((img) => img.name !== name));
   return (
-    <Box component="form" className="form-container">
-      <div className="form-section">
+    <Box component="form" className={styles.formContainer}>
+      <div className={styles.formSection}>
         <Typography variant="h6" color="primary">
           Address Information
         </Typography>
         <TextField id="street-number" label="Street number" />
-        <span className="form-row">
+        <span className={styles.formRow}>
           <TextField id="street-name" label="Street name" sx={{ width: '100%' }} />
           <FormControl sx={{ minWidth: '45%' }}>
             <InputLabel id="street-suffix">Street Suffix</InputLabel>
@@ -47,16 +47,16 @@ const AddHouseForm = () => {
             </Select>
           </FormControl>
         </span>
-        <span className="form-row">
+        <span className={styles.formRow}>
           <TextField id="city" label="City" />
           <TextField id="state" label="State" />
         </span>
       </div>
-      <div className="form-section">
+      <div className={styles.formSection}>
         <Typography variant="h6" color="primary">
           Property Information
         </Typography>
-        <span className="form-row">
+        <span className={styles.formRow}>
           <TextField
             id="price"
             type="number"
@@ -77,15 +77,15 @@ const AddHouseForm = () => {
             </Select>
           </FormControl>
         </span>
-        <span className="form-row">
+        <span className={styles.formRow}>
           <TextField id="year-built" type="number" defaultValue={2000} label="Year built" />
           <TextField id="dimension" type="number" label="Dimension (sqft)" />
         </span>
-        <span className="form-row">
+        <span className={styles.formRow}>
           <TextField id="floor" type="number" label="Floor" />
           <TextField id="floors-in-building" type="number" label="Floors in building" />
         </span>
-        <span className="form-row">
+        <span className={styles.formRow}>
           <TextField id="rooms-number" type="number" label="Number of rooms" />
           <TextField id="bathroom-number" type="number" label="Number of bathrooms" />
         </span>
@@ -112,7 +112,7 @@ const AddHouseForm = () => {
 
       {moreFacilities && (
         <FormGroup>
-          <span className="more-params-checkbox">
+          <span className={styles.moreParamsCheckbox}>
             <FormControlLabel control={<Checkbox />} label="Garage" />
             <FormControlLabel control={<Checkbox />} label="Parking spot" />
             <FormControlLabel control={<Checkbox />} label="Garden" />
@@ -147,9 +147,9 @@ const AddHouseForm = () => {
       {images?.map(
         (image) =>
           image && (
-            <div key={image.name} className="form-images-container">
-              <img src={URL.createObjectURL(image)} alt={image.name} className="form-image" />
-              <button type="button" className="form-image-remove-button" onClick={() => removeImage(image.name)}>
+            <div key={image.name} className={styles.formImagesContainer}>
+              <img src={URL.createObjectURL(image)} alt={image.name} className={styles.formImage} />
+              <button type="button" className={styles.formImageRemoveButton} onClick={() => removeImage(image.name)}>
                 <DeleteForeverIcon color="secondary" />
               </button>
             </div>
