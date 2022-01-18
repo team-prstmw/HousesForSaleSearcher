@@ -20,6 +20,8 @@ const theme = createTheme({
 });
 
 function App() {
+  const [LoggedIn, setLoggedIn] = React.useState(false);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
