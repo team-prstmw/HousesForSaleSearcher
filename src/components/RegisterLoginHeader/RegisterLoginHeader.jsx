@@ -5,27 +5,21 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
 
-const label = { inputProps: { 'aria-label': 'Login Register Switch' } };
+import styles from './RegisterLoginHeader.module.css';
 
-function RegisterLoginHeader() {
+function RegisterLoginHeader(props) {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexWrap: 'nowrap',
-        alignContent: 'center',
-        height: 245,
-      }}
-    >
+    <Box className={styles.registerLoginHeader__Wrapper}>
       <Typography variant="h2" component="h2" sx={{ fontFamily: 'Zilla Slab', color: '#30336BBF' }}>
         Welcome!
       </Typography>
       <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
         <Typography>Log in</Typography>
-        <Switch {...label} defaultChecked />
+        <Switch
+          checked={props.checked}
+          onChange={props.onChange}
+          inputProps={{ 'aria-label': 'Login Register Switch' }}
+        />
         <Typography>Register</Typography>
       </Stack>
     </Box>
