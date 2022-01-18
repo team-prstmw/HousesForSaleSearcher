@@ -14,11 +14,9 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
+import FormHelperText from '@mui/material/FormHelperText';
 
 import { signUp } from '/src/utils/auth';
-
-// import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -131,7 +129,6 @@ function RegisterForm(props) {
                   value={values.password}
                   onChange={handleChange('password')}
                   placeholder="Password"
-                  // autoComplete="new-password"
                   sx={{
                     width: 327,
                     height: 55,
@@ -151,11 +148,11 @@ function RegisterForm(props) {
                   }
                   label="Password"
                 />
+                <FormHelperText id="component-helper-text">At least 8 characters</FormHelperText>
               </FormControl>
               // </>
             )}
           />
-          {/* <input type="submit" /> */}
           <Button
             color="primary"
             type="submit"
@@ -173,7 +170,6 @@ function RegisterForm(props) {
     </Box>
   );
 }
-
 RegisterForm.propTypes = {};
 
 export default RegisterForm;
