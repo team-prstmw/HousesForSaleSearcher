@@ -105,6 +105,7 @@ const AddHouseForm = () => {
           label="Street number"
           error={errors?.streetNumber}
           helperText={errors?.streetNumber && errors?.streetNumber.message}
+          autoComplete="address-line1"
         />
         <span className={styles.formRow}>
           <TextField
@@ -114,6 +115,7 @@ const AddHouseForm = () => {
             error={errors?.streetName}
             helperText={errors?.streetName && errors?.streetName.message}
             sx={{ width: '100%' }}
+            autoComplete="address-line2"
           />
           <FormControl sx={{ minWidth: '45%' }} error={errors?.streetSuffix}>
             <InputLabel id="street-suffix">Street Suffix</InputLabel>
@@ -141,6 +143,7 @@ const AddHouseForm = () => {
             label="City"
             error={errors?.city}
             helperText={errors?.city && errors?.city.message}
+            autoComplete="address-level12"
           />
           <TextField
             id="state"
@@ -148,6 +151,7 @@ const AddHouseForm = () => {
             label="State"
             error={errors?.state}
             helperText={errors?.state && errors?.state.message}
+            autoComplete="state"
           />
         </span>
       </div>
@@ -280,20 +284,20 @@ const AddHouseForm = () => {
       {moreFacilities && (
         <FormGroup>
           <span className={styles.moreParamsCheckbox}>
-            <FormControlLabel control={<Checkbox />} label="Garage" />
-            <FormControlLabel control={<Checkbox />} label="Parking spot" />
-            <FormControlLabel control={<Checkbox />} label="Garden" />
-            <FormControlLabel control={<Checkbox />} label="Elevator" />
-            <FormControlLabel control={<Checkbox />} label="Loggy" />
-            <FormControlLabel control={<Checkbox />} label="Basement" />
-            <FormControlLabel control={<Checkbox />} label="Balcony" />
-            <FormControlLabel control={<Checkbox />} label="Terrace" />
-            <FormControlLabel control={<Checkbox />} label="Internet" />
-            <FormControlLabel control={<Checkbox />} label="Playground" />
-            <FormControlLabel control={<Checkbox />} label="Swimming pool" />
-            <FormControlLabel control={<Checkbox />} label="Gym" />
-            <FormControlLabel control={<Checkbox />} label="Entresol" />
-            <FormControlLabel control={<Checkbox />} label="Kitchenette" />
+            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Garage" />
+            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Parking spot" />
+            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Garden" />
+            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Elevator" />
+            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Basement" />
+            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Loggy" />
+            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Balcony" />
+            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Terrace" />
+            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Entresol" />
+            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Playground" />
+            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Internet" />
+            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Swimming pool" />
+            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Gym" />
+            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Kitchenette" />
           </span>
         </FormGroup>
       )}

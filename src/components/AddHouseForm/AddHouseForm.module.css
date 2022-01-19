@@ -25,6 +25,7 @@
 .moreParamsCheckbox {
   display: flex;
   flex-wrap: wrap;
+  min-width: 50%;
 }
 
 .formImagesContainer {
