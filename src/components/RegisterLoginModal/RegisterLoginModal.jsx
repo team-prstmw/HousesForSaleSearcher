@@ -1,17 +1,17 @@
-import React from 'react';
+import { useState } from 'react';
 
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import RegisterLoginHeader from '../RegisterLoginHeader/RegisterLoginHeader';
-import RegisterForm from '../RegisterForm/RegisterForm';
-import LoginForm from '../LoginForm/LoginForm';
+import RegisterLoginHeader from '@/components/RegisterLoginHeader/RegisterLoginHeader';
+import LoginForm from '@/components/LoginForm/LoginForm';
+import RegisterForm from '@/components/RegisterForm/RegisterForm';
 
 import styles from './RegisterLoginModal.module.css';
 
 function RegisterLoginModal() {
-  const [open, setOpen] = React.useState(false);
-  const [checked, setChecked] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

@@ -1,7 +1,5 @@
-import { makeRequest } from './makeRequest';
-
-const SIGN_IN_URL =
-  'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCitsvLe-Yf_n2lpVF4k4FRZyoJl_Kt1Ks';
+import { SIGN_IN_URL } from '../../URLs';
+import makeRequest from '../services/makeRequest';
 
 export const signIn = (email, password) => {
   return makeRequest(SIGN_IN_URL, {

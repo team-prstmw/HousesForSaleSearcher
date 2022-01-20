@@ -7,7 +7,7 @@ import Switch from '@mui/material/Switch';
 
 import styles from './RegisterLoginHeader.module.css';
 
-function RegisterLoginHeader(props) {
+function RegisterLoginHeader({ checked, onChange }) {
   return (
     <Box className={styles.registerLoginHeader__Wrapper}>
       <Typography variant="h2" component="h2" sx={{ fontFamily: 'Zilla Slab', color: '#30336BBF' }}>
@@ -15,11 +15,7 @@ function RegisterLoginHeader(props) {
       </Typography>
       <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
         <Typography>Log in</Typography>
-        <Switch
-          checked={props.checked}
-          onChange={props.onChange}
-          inputProps={{ 'aria-label': 'Login Register Switch' }}
-        />
+        <Switch checked={checked} onChange={onChange} inputProps={{ 'aria-label': 'Login Register Switch' }} />
         <Typography>Register</Typography>
       </Stack>
     </Box>

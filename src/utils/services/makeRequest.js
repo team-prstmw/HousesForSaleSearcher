@@ -1,5 +1,5 @@
 export const makeRequest = (url, options) => {
-  return fetch(url, options).then((response) => {
+  return fetch(url, (options = { method: 'GET' })).then((response) => {
     return response.json().then((data) => {
       if (!response.ok) {
         throw {

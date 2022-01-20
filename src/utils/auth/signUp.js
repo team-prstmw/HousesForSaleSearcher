@@ -1,12 +1,9 @@
-import { makeRequest } from './makeRequest';
-
-// const API_KEY = `${process.env.REACT_APP_FIREBASE_APP_KEY}`;
-
-const SIGN_UP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCitsvLe-Yf_n2lpVF4k4FRZyoJl_Kt1Ks`;
+import { SIGN_UP_URL } from '../../URLs';
+import makeRequest from '../services/makeRequest';
 
 export const signUp = (email, password) => {
   return makeRequest(SIGN_UP_URL, {
-    method: 'POST',
+    method: 'GET',
     body: JSON.stringify({
       email,
       password,

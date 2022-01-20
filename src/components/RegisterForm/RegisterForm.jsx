@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import { useForm, Controller } from 'react-hook-form';
 
-import isEmail from 'validator/lib/isEmail';
-
 import Box from '@mui/system/Box';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
@@ -15,18 +13,35 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import FormHelperText from '@mui/material/FormHelperText';
-
-import { signUp } from '/src/utils/auth';
+import { signUp } from '../../utils/auth';
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+const schema = yup.object({
+  name: yup.string().required('This field is required.'),
+  email: yup.string().email('Invalid email format').required('This field is required.'),
+  password: yup.string().required('This field is required.'),
+});
 
 function RegisterForm(props) {
   const [values, setValues] = React.useState({
     password: '',
     showPassword: false,
   });
-  const { control, handleSubmit } = useForm();
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    mode: 'onBlur',
+    resolver: yupResolver(schema),
+  });
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -43,11 +58,13 @@ function RegisterForm(props) {
     event.preventDefault();
   };
 
-  const onSubmit = (data) => {
-    signUp(data.email, data.password);
+  const onSubmit = ({ email, password }) => {
+    signUp(email, password);
   };
   return (
     <Box
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -57,116 +74,116 @@ function RegisterForm(props) {
         alignContent: 'center',
       }}
     >
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={3} sx={{ alignItems: 'center' }}>
-          <Controller
-            name="name"
-            control={control}
-            defaultValue=""
-            rules={{ required: true }}
-            className="materialUIInput"
-            render={({ field }) => (
-              <TextField
-                id="outlined-textarea-name"
-                label="Name"
-                placeholder="Name"
-                multiline
+      <Stack spacing={4} sx={{ alignItems: 'center' }}>
+        <Controller
+          className="materialUIInput"
+          name="name"
+          defaultValue=""
+          control={control}
+          render={({ field }) => (
+            <TextField
+              id="outlined-textarea-name"
+              {...register('name')}
+              error={!!errors?.name}
+              helperText={errors?.name && errors?.name.message}
+              label="Name"
+              placeholder="Name"
+              autoComplete="Name"
+              required
+              sx={{
+                width: 327,
+                height: 55,
+                borderRadius: 4,
+              }}
+              {...field}
+            />
+          )}
+        />
+        <Controller
+          className="materialUIInput"
+          name="email"
+          defaultValue=""
+          control={control}
+          render={({ field }) => (
+            <TextField
+              id="outlined-textarea-email"
+              {...register('email')}
+              error={!!errors?.email}
+              helperText={errors?.email && errors?.email.message}
+              label="E-mail"
+              placeholder="E-mail"
+              required
+              type="email"
+              autoComplete="email"
+              sx={{
+                width: 327,
+                height: 55,
+                borderRadius: 4,
+              }}
+              {...field}
+            />
+          )}
+        />
+        <Controller
+          className="materialUIInput"
+          name="password"
+          defaultValue=""
+          control={control}
+          render={({ field }) => (
+            <FormControl sx={{ m: 1 }} variant="outlined">
+              <InputLabel
+                error
                 required
+                htmlFor="outlined-adornment-password"
+                {...register('password')}
+                error={!!errors?.password}
+              >
+                Password
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={values.showPassword ? 'text' : 'password'}
+                value={values.password}
+                onChange={handleChange('password')}
+                placeholder="Password"
+                error={!!errors?.password}
                 sx={{
                   width: 327,
                   height: 55,
-                  borderRadius: 4,
                 }}
                 {...field}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
               />
-            )}
-          />
-          <Controller
-            name="email"
-            control={control}
-            defaultValue=""
-            className="materialUIInput"
-            rules={{
-              required: {
-                value: true,
-                message: 'email is required',
-              },
-              validate: (email) => isEmail(email) || 'must be valid email address',
-            }}
-            render={({ field }) => (
-              <TextField
-                id="outlined-textarea-email"
-                label="E-mail"
-                placeholder="E-mail"
-                multiline
-                required
-                type="email"
-                sx={{
-                  width: 327,
-                  height: 55,
-                  borderRadius: 4,
-                }}
-                {...field}
-              />
-            )}
-          />
-          <Controller
-            name="password"
-            control={control}
-            defaultValue=""
-            className="materialUIInput"
-            rules={{ required: true, minLength: 8 }}
-            // helperText="At least 8 characters"
-            render={({ field }) => (
-              <FormControl sx={{ m: 1, helperText: 'At least 8 characters' }} variant="outlined">
-                {/* <> */}
-                <InputLabel required htmlFor="outlined-adornment-password">
-                  Password
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={values.showPassword ? 'text' : 'password'}
-                  value={values.password}
-                  onChange={handleChange('password')}
-                  placeholder="Password"
-                  sx={{
-                    width: 327,
-                    height: 55,
-                  }}
-                  {...field}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                />
-                <FormHelperText id="component-helper-text">At least 8 characters</FormHelperText>
-              </FormControl>
-              // </>
-            )}
-          />
-          <Button
-            color="primary"
-            type="submit"
-            variant="contained"
-            onClick={handleSubmit(onSubmit)}
-            sx={{
-              width: 224,
-              height: 36,
-            }}
-          >
-            REGISTER
-          </Button>
-        </Stack>
-      </form>
+              <FormHelperText error>{errors?.password && errors?.password.message}</FormHelperText>
+              <FormHelperText id="component-helper-text">At least 6 characters</FormHelperText>
+            </FormControl>
+          )}
+        />
+        <Button
+          color="primary"
+          type="submit"
+          variant="contained"
+          onClick={handleSubmit(onSubmit)}
+          sx={{
+            width: 224,
+            height: 36,
+          }}
+        >
+          REGISTER
+        </Button>
+      </Stack>
     </Box>
   );
 }
