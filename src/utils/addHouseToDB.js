@@ -1,24 +1,27 @@
-import create from './api';
+import { create } from './api';
 
-export default addHouse = (
-  streetNumber,
-  streetName,
-  streetSuffix,
-  city,
-  state,
-  price,
-  typeOfProperty,
-  yearBuilt,
-  dimension,
-  floor,
-  floorsInBuilding,
-  numberOfRooms,
-  numberOfBathrooms,
-  heating,
-  moreFacilities = [],
-  moreInformation,
-  images = []
-) => {
+export const addHouseToDB = (props) => {
+  const {
+    bathroomNumber,
+    city,
+    descriptionField,
+    dimension,
+    floor,
+    floorsInBuilding,
+    heating,
+    price,
+    propertyType,
+    roomsNumber,
+    state,
+    streetName,
+    streetNumber,
+    streetSuffix,
+    yearBuilt,
+    images,
+    moreFacilities,
+    ...otherProps
+  } = props.fields;
+
   const newHouseData = {
     streetNumber,
     streetName,
@@ -26,19 +29,21 @@ export default addHouse = (
     city,
     state,
     price,
-    typeOfProperty,
+    propertyType,
     yearBuilt,
     dimension,
     floor,
     floorsInBuilding,
-    numberOfRooms,
-    numberOfBathrooms,
+    roomsNumber,
+    bathroomNumber,
     heating,
     moreFacilities,
-    moreInformation,
+    descriptionField,
     images,
     createdAt: new Date().toISOString(),
   };
 
-  return create(key, newHouseData);
+  return create('houses', newHouseData);
 };
+
+export default addHouseToDB;

@@ -21,6 +21,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
+import addHouseToDB from '../../utils/addHouseToDB';
+
 import styles from './AddHouseForm.module.css';
 
 const schema = yup.object({
@@ -92,6 +94,7 @@ const AddHouseForm = () => {
 
   const handleSend = (fields) => {
     console.log({ fields });
+    addHouseToDB({ fields });
   };
   return (
     <Box component="form" className={styles.formContainer} onSubmit={handleSubmit(handleSend)}>
