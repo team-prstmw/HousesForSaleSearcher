@@ -1,13 +1,14 @@
 import { Container } from '@mui/material';
 import Paper from '@mui/material/Paper';
+import useTheme from '@mui/material/styles/useTheme';
 import Typography from '@mui/material/Typography';
-import React from 'react';
 
-import AddHouseForm from '../../components/AddHouseForm/AddHouseForm';
-import theme from '../../utils/theme';
+import AddHouseForm from '@/components/AddHouseForm/AddHouseForm';
+
 import styles from './SellHousePage.module.css';
 
 const SellHousePage = () => {
+  const theme = useTheme();
   return (
     <Container component={Paper} maxWidth={false} className={styles.shpContainer}>
       <div className={styles.shpContent}>

@@ -4,7 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import SellHousePage from './pages/SellHousePage/SellHousePage';
-import theme from './utils/theme';
+import theme from './theme/theme';
 
 function App() {
   return (
