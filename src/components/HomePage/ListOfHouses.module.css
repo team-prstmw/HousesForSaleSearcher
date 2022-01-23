@@ -1,0 +1,169 @@
+.housesComponent {
+  margin-top: 22px;
+}
+
+.housesList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  height: 658px;
+  overflow-y: scroll;
+}
+
+.housesList::-webkit-scrollbar {
+  width: 10px;
+}
+
+.housesList::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.housesList::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.housesList::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.houseElement {
+  border: 1px solid #d6d6d6;
+  border-radius: 4px;
+  margin-bottom: 7px;
+  position: relative;
+}
+
+.houseElement h4 {
+  margin: 0;
+  padding: 10px 0 0 10px;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  font-family: Roboto;
+  color: #535c68;
+}
+
+.price {
+  font-family: Roboto;
+  margin: 0;
+  padding: 5px 0 10px 10px;
+  color: #535c68;
+  font-size: 12px;
+  line-height: 17px;
+}
+
+.houseElement img {
+  width: 100%;
+}
+
+.shortInfo {
+  margin: 0;
+  padding-top: 16px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+  font-family: Roboto;
+  letter-spacing: 0.25px;
+  color: #00000099;
+}
+
+.moreInfo {
+  padding: 0;
+  margin-top: 22px;
+  margin-bottom: 29px;
+  margin-left: 10px;
+  color: #22a6b3;
+}
+
+.moreInfo:hover {
+  background-color: #fff;
+}
+
+.icon {
+  position: absolute !important;
+  right: 10px;
+  padding: 0 !important;
+  padding-top: 7px !important;
+  text-align: right;
+  background-color: #fff;
+}
+
+.sortBy {
+  margin-left: 20px;
+}
+
+.sortBy div {
+  padding-bottom: 0 !important;
+}
+.sortBy > div {
+  margin-bottom: 8px;
+}
+.sortBy button {
+  margin-top: 3px !important;
+}
+
+.sortBy div span {
+  font-family: Roboto;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+  color: #535c68de;
+  font-weight: 500;
+}
+
+.sortBy .options {
+  display: inline-block;
+  width: 175px;
+  margin-left: 10px;
+}
+
+.options input {
+  padding: 0 !important;
+}
+
+.sortBy div:first-child {
+  vertical-align: inherit;
+}
+
+.sortBy > div:last-child {
+  background-color: #6ab04c46;
+  width: fit-content;
+  height: 30px;
+  text-align: center;
+  border-radius: 16px;
+}
+
+.sortBy > div:last-child span,
+.sortBy > div:last-child svg:first-child {
+  color: #6ab04cde;
+}
+
+@media screen and (min-width: 300px) {
+  .housesComponent {
+    border-left: none;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .houseElement {
+    margin-right: 5px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .housesComponent {
+    border-left: 2px solid #535c684d;
+  }
+  .houseElement {
+    margin-right: 5px;
+  }
+}
+
+@media screen and (min-width: 1230px) {
+  .houseElement {
+    margin-right: 0px;
+  }
+}

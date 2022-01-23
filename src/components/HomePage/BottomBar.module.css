@@ -1,0 +1,75 @@
+.fotterContainer {
+  display: flex;
+  width: 100%;
+  height: 129px;
+  justify-content: center;
+  align-items: center;
+  background-color: #535c684d;
+  padding-left: 0;
+}
+
+.fotterText {
+  font-weight: 400;
+  text-align: center;
+  font-family: Roboto;
+  color: #535c68 !important;
+}
+
+.fotterText:hover {
+  font-weight: bold;
+  color: #282b2e !important;
+}
+
+@media screen and (min-width: 300px) {
+  .fotterText {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+  }
+
+  .fotterImage {
+    margin-left: 5px;
+    width: 21px;
+    height: 21px;
+  }
+}
+@media screen and (min-width: 600px) {
+  .fotterText {
+    font-size: 19px;
+    line-height: 35px;
+    letter-spacing: 0.8px;
+  }
+
+  .fotterImage {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .fotterText {
+    font-size: 22px;
+    line-height: 45px;
+    letter-spacing: 1px;
+  }
+
+  .fotterImage {
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .fotterText {
+    font-size: 24px;
+    line-height: 56px;
+    letter-spacing: 1.2px;
+  }
+
+  .fotterImage {
+    margin-left: 10px;
+    width: 49px;
+    height: 49px;
+  }
+}
