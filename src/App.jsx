@@ -1,33 +1,29 @@
 import './App.css';
 import React from 'react';
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-
 import RegisterLoginModal from './components/RegisterLoginModal/RegisterLoginModal';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#7ED6DF',
-      success: '#6ab04c',
-      error: '#eb4d4b',
-      contrastText: '#fff',
-    },
-    secondary: {
-      main: '#535c68',
-    },
-  },
-});
+import { ThemeProvider } from '@mui/material/styles';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import SellHousePage from './pages/SellHousePage/SellHousePage';
+import theme from './theme/theme';
 
 function App() {
   const [LoggedIn, setLoggedIn] = React.useState(false);
-
   return (
-    <ThemeProvider theme={theme}>
+    <BrowserRouter>
       <div className="App">
-        <RegisterLoginModal />
+        <ThemeProvider theme={theme}>
+          <Routes>
+            <Route path="/" element={<h1>INDEX PAGE</h1>} />
+            <Route path="/user" element={<h1>USER PAGE</h1>} />
+            <Route path="/favorites" element={<h1>FAVORITES</h1>} />
+            <Route path="/sell-house" element={<SellHousePage />} />
+          </Routes>
+        </ThemeProvider>
       </div>
-    </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
