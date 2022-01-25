@@ -3,9 +3,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
@@ -16,9 +14,10 @@ import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 
 import styles from './AddHouseForm.module.css';
+import FacilityCheckbox from './components/FacilityCheckbox/FacilityCheckbox';
 
 const AddHouseForm = () => {
-  const [moreFacilities, setMoreFacilities] = useState(false);
+  const [moreFacilitiesShown, setMoreFacilitiesShown] = useState(false);
   const [images, setImages] = useState();
 
   const addImages = (rawImages) => {
@@ -26,6 +25,27 @@ const AddHouseForm = () => {
   };
 
   const removeImage = (name) => setImages((prevState) => prevState?.filter((img) => img.name !== name));
+
+  const handleSend = (fields) => {
+    console.log({ fields });
+  };
+
+  const facilities = [
+    'Garage',
+    'Parking spot',
+    'Garden',
+    'Elevator',
+    'Basement',
+    'Loggy',
+    'Balcony',
+    'Terrace',
+    'Entresol',
+    'Playground',
+    'Internet',
+    'Swimming pool',
+    'Gym',
+    'Kitchenette',
+  ];
   return (
     <Box component="form" className={styles.formContainer}>
       <div className={styles.formSection}>
@@ -103,30 +123,19 @@ const AddHouseForm = () => {
       </div>
       <Button
         variant="outlined"
-        onClick={() => setMoreFacilities((prevState) => !prevState)}
-        endIcon={moreFacilities ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        onClick={() => setMoreFacilitiesShown((prevState) => !prevState)}
+        endIcon={moreFacilitiesShown ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         sx={{ margin: '10px 0' }}
       >
         MORE FACILITIES
       </Button>
 
-      {moreFacilities && (
+      {moreFacilitiesShown && (
         <FormGroup>
           <span className={styles.moreParamsCheckbox}>
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Garage" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Parking spot" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Garden" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Elevator" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Basement" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Loggy" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Balcony" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Terrace" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Entresol" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Playground" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Internet" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Swimming pool" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Gym" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Kitchenette" />
+            {facilities.map((facility) => (
+              <FacilityCheckbox key={facility} label={facility} />
+            ))}
           </span>
         </FormGroup>
       )}
