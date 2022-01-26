@@ -5,9 +5,6 @@
   max-width: 90%;
 }
 
-.header {
-}
-
 .headerContainer {
   display: flex;
   flex-direction: column;
@@ -23,7 +20,4 @@
   align-items: center;
   width: max-content;
   margin: 0 auto;
-}
-
-.avatar {
 }

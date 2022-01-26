@@ -4,7 +4,7 @@ import InputBase from '@mui/material/InputBase';
 
 import styles from './TextInput.module.css';
 
-const TextInput = ({ placeholder, register, error, password, disabled, defaultValue }) => {
+const TextInput = ({ placeholder, register, error, password, disabled, defaultValue, readOnly }) => {
   return (
     <div className={styles.container}>
       <InputBase
@@ -14,6 +14,7 @@ const TextInput = ({ placeholder, register, error, password, disabled, defaultVa
         type={password ? 'password' : 'text'}
         disabled={disabled}
         defaultValue={defaultValue}
+        readOnly={readOnly}
         {...register}
       />
       {!!error?.message && (

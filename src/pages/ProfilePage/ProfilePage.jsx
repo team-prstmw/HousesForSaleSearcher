@@ -4,17 +4,15 @@ import { Container, useTheme } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { deepOrange } from '@mui/material/colors';
-import InputBase from '@mui/material/InputBase';
 import Paper from '@mui/material/Paper';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
+import EditButtons from './components/EditButtons/EditButtons';
 import FormRow from './components/FormRow/FormRow';
 import TextInput from './components/TextInput/TextInput';
 import styles from './ProfilePage.module.css';
@@ -31,12 +29,14 @@ const schema = yup.object({
 });
 
 const ProfilePage = () => {
-  const [value, setValue] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(0);
   const theme = useTheme();
+  const [formData, setFormData] = useState({ nameEditable: false, passwordEditable: false, tempImage: '' });
 
   const {
     register,
-    handleSubmit,
+    getValues,
+    setValue,
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
@@ -44,22 +44,66 @@ const ProfilePage = () => {
   });
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setSelectedTab(newValue);
   };
 
-  const handleSend = () => {};
+  const avatarUrl = () => {
+    if (formData?.image && typeof formData?.image === 'string') {
+      return formData.image;
+    }
+
+    if (formData?.tempImage instanceof File) {
+      return URL.createObjectURL(formData.tempImage);
+    }
+    return '';
+  };
+
+  const setEditable = (field) =>
+    setFormData((prevState) => ({ ...prevState, [`${field}Editable`]: !prevState[`${field}Editable`] }));
+
+  const onChangeName = () => {
+    setEditable('name');
+    setFormData((prevState) => ({ ...prevState, namePrev: getValues('name') }));
+    // SEND REQUEST
+  };
+
+  const onChangePassword = () => {
+    setEditable('password');
+    setFormData((prevState) => ({ ...prevState, passwordPrev: getValues('password') }));
+    // SEND REQUEST
+  };
+
+  const onCancelChange = (field) => {
+    const fieldPrev = `${field}Prev`;
+
+    if (formData[fieldPrev]) {
+      setValue(field, formData[fieldPrev]);
+      setEditable(field);
+    } else {
+      setEditable(field);
+    }
+  };
+
+  const onAddAvatar = (image) => {
+    setFormData((prevState) => ({ ...prevState, tempImage: image }));
+    // SEND REQUEST
+  };
+
+  const getInitials = () => (getValues('name')?.[0] ? getValues('name')[0].toUpperCase() : undefined);
+
   return (
     <div>
       <Container component={Paper} maxWidth={false} className={styles.container}>
         <div className={styles.headerContainer}>
           <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
             <Tabs
-              value={value}
+              value={selectedTab}
               onChange={handleChange}
               textColor="secondary"
               indicatorColor="secondary"
-              aria-label="secondary tabs example"
-              centered
+              variant="scrollable"
+              scrollButtons="auto"
+              sx={{ maxWidth: 'max-content', margin: '0 auto' }}
             >
               <Tab label="Account Settings" />
               <Tab label="Favourites" />
@@ -77,28 +121,47 @@ const ProfilePage = () => {
               }}
               mb={2}
             >
-              Welcome, Name!
+              {`Welcome${getValues('name') ? `, ${getValues('name')}` : ''}!`}
             </Typography>
           </span>
         </div>
         <div className={styles.avatarContainer}>
-          <Avatar
-            sx={{ bgcolor: deepOrange[500], width: 100, height: 100, fontSize: 36, margin: 2 }}
-            alt="Remy Sharp"
-            src="/broken-image.jpg"
-          >
-            N
+          <Avatar sx={{ bgcolor: '#30336b', width: 100, height: 100, fontSize: 36, margin: 2 }} src={avatarUrl()}>
+            {getInitials()}
           </Avatar>
-          <Button variant="outlined" startIcon={<EditIcon />}>
-            EDIT PHOTO
-          </Button>
+          <input
+            style={{ display: 'none' }}
+            id="images-upload"
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={(e) => onAddAvatar(e.target.files[0])}
+          />
+          <label htmlFor="images-upload">
+            <Button variant="text" component="span" startIcon={<EditIcon />}>
+              EDIT PHOTO
+            </Button>
+          </label>
         </div>
         <main className="main">
-          <Box component="form" onSubmit={handleSubmit(handleSend)}>
+          <Box component="form">
             <FormRow
               label={<Typography variant="h6">Name</Typography>}
-              input={<TextInput placeholder="Name" register={register('name')} error={errors.name} />}
-              action={<Button>Edit</Button>}
+              input={
+                <TextInput
+                  placeholder="Name"
+                  readOnly={!formData.nameEditable}
+                  register={register('name')}
+                  error={errors.name}
+                />
+              }
+              action={
+                formData.nameEditable ? (
+                  <EditButtons onCancel={() => onCancelChange('name')} onSave={onChangeName} />
+                ) : (
+                  <Button onClick={() => setEditable('name')}>Edit</Button>
+                )
+              }
             />
             <FormRow
               label={<Typography variant="h6">E-mail</Typography>}
@@ -112,12 +175,19 @@ const ProfilePage = () => {
                     placeholder="************"
                     password
                     defaultValue={null}
+                    readOnly={!formData.passwordEditable}
                     register={register('password')}
                     error={errors.password}
                   />
                 </div>
               }
-              action={<Button>Change</Button>}
+              action={
+                formData.passwordEditable ? (
+                  <EditButtons onCancel={() => onCancelChange('password')} onSave={onChangePassword} />
+                ) : (
+                  <Button onClick={() => setEditable('password')}>Edit</Button>
+                )
+              }
             />
           </Box>
         </main>
