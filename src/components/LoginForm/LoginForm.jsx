@@ -1,10 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { useForm, Controller } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 
 import Box from '@mui/system/Box';
 import Stack from '@mui/material/Stack';
@@ -17,15 +15,15 @@ import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import FormHelperText from '@mui/material/FormHelperText';
 
-import { signIn } from '/src/utils/auth';
+import { signInSignUp } from '/src/utils/auth';
+import { SIGN_IN_URL } from '/src/URLs';
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-const schema = yup.object({
-  email: yup.string().email('Invalid email format').required('This field is required.'),
-  password: yup.string().required('This field is required.'),
-});
+import { loginSchema } from '/src/schemas/authSchemas';
+
+import styles from '/src/components/LoginForm/LoginForm.module.css';
 
 function LoginForm(props) {
   const [loginError, setLoginError] = React.useState(false);
@@ -41,7 +39,7 @@ function LoginForm(props) {
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
-    resolver: yupResolver(schema),
+    resolver: yupResolver(loginSchema),
   });
 
   const handleChange = (prop) => (event) => {
@@ -60,7 +58,7 @@ function LoginForm(props) {
   };
 
   const onSubmit = ({ email, password }) => {
-    signIn(email, password);
+    signInSignUp(email, password, SIGN_IN_URL);
   };
   return (
     <Box
@@ -75,7 +73,7 @@ function LoginForm(props) {
         alignContent: 'center',
       }}
     >
-      <Stack spacing={4} sx={{ alignItems: 'center' }}>
+      <Stack spacing={4} className={styles.stack__wrapper}>
         <Controller
           className="materialUIInput"
           name="email"
@@ -92,11 +90,7 @@ function LoginForm(props) {
               required
               type="email"
               autoComplete="email"
-              sx={{
-                width: 327,
-                height: 55,
-                borderRadius: 4,
-              }}
+              className={styles.textField}
               {...field}
             />
           )}
@@ -107,7 +101,7 @@ function LoginForm(props) {
           defaultValue=""
           control={control}
           render={({ field }) => (
-            <FormControl sx={{ m: 1 }} variant="outlined">
+            <FormControl variant="outlined">
               <InputLabel
                 error
                 required
@@ -124,10 +118,7 @@ function LoginForm(props) {
                 onChange={handleChange('password')}
                 placeholder="Password"
                 error={!!errors?.password}
-                sx={{
-                  width: 327,
-                  height: 55,
-                }}
+                className={styles.textField}
                 {...field}
                 endAdornment={
                   <InputAdornment position="end">
@@ -153,10 +144,7 @@ function LoginForm(props) {
           type="submit"
           variant="contained"
           onClick={handleSubmit(onSubmit)}
-          sx={{
-            width: 224,
-            height: 36,
-          }}
+          className={styles.loginButton}
         >
           LOG IN
         </Button>
@@ -164,7 +152,5 @@ function LoginForm(props) {
     </Box>
   );
 }
-
-LoginForm.propTypes = {};
 
 export default LoginForm;

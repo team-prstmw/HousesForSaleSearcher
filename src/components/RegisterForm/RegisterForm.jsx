@@ -1,7 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
 import { useForm, Controller } from 'react-hook-form';
+import { useState } from 'react';
 
 import Box from '@mui/system/Box';
 import Stack from '@mui/material/Stack';
@@ -13,22 +11,20 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import FormHelperText from '@mui/material/FormHelperText';
-import { signUp } from '../../utils/auth';
+import { signInSignUp } from '/src/utils/auth';
+import { SIGN_UP_URL } from '/src/URLs';
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 
-const schema = yup.object({
-  name: yup.string().required('This field is required.'),
-  email: yup.string().email('Invalid email format').required('This field is required.'),
-  password: yup.string().required('This field is required.'),
-});
+import { registerSchema } from '/src/schemas/authSchemas';
+
+import styles from '/src/components/RegisterForm/RegisterForm.module.css';
 
 function RegisterForm(props) {
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     password: '',
     showPassword: false,
   });
@@ -40,7 +36,7 @@ function RegisterForm(props) {
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
-    resolver: yupResolver(schema),
+    resolver: yupResolver(registerSchema),
   });
 
   const handleChange = (prop) => (event) => {
@@ -59,22 +55,11 @@ function RegisterForm(props) {
   };
 
   const onSubmit = ({ email, password }) => {
-    signUp(email, password);
+    signInSignUp(email, password, SIGN_UP_URL);
   };
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit(onSubmit)}
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexWrap: 'nowrap',
-        alignContent: 'center',
-      }}
-    >
-      <Stack spacing={4} sx={{ alignItems: 'center' }}>
+    <Box className={styles.registerForm__wrapper} component="form" onSubmit={handleSubmit(onSubmit)}>
+      <Stack spacing={4} className={styles.stack__wrapper}>
         <Controller
           className="materialUIInput"
           name="name"
@@ -90,11 +75,7 @@ function RegisterForm(props) {
               placeholder="Name"
               autoComplete="Name"
               required
-              sx={{
-                width: 327,
-                height: 55,
-                borderRadius: 4,
-              }}
+              className={styles.textField}
               {...field}
             />
           )}
@@ -115,11 +96,7 @@ function RegisterForm(props) {
               required
               type="email"
               autoComplete="email"
-              sx={{
-                width: 327,
-                height: 55,
-                borderRadius: 4,
-              }}
+              className={styles.textField}
               {...field}
             />
           )}
@@ -130,7 +107,7 @@ function RegisterForm(props) {
           defaultValue=""
           control={control}
           render={({ field }) => (
-            <FormControl sx={{ m: 1 }} variant="outlined">
+            <FormControl variant="outlined">
               <InputLabel
                 error
                 required
@@ -147,10 +124,7 @@ function RegisterForm(props) {
                 onChange={handleChange('password')}
                 placeholder="Password"
                 error={!!errors?.password}
-                sx={{
-                  width: 327,
-                  height: 55,
-                }}
+                className={styles.textField}
                 {...field}
                 endAdornment={
                   <InputAdornment position="end">
@@ -176,10 +150,7 @@ function RegisterForm(props) {
           type="submit"
           variant="contained"
           onClick={handleSubmit(onSubmit)}
-          sx={{
-            width: 224,
-            height: 36,
-          }}
+          className={styles.registerButton}
         >
           REGISTER
         </Button>
@@ -187,6 +158,5 @@ function RegisterForm(props) {
     </Box>
   );
 }
-RegisterForm.propTypes = {};
 
 export default RegisterForm;

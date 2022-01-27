@@ -6,15 +6,21 @@ import Box from '@mui/material/Box';
 import RegisterLoginHeader from '@/components/RegisterLoginHeader/RegisterLoginHeader';
 import LoginForm from '@/components/LoginForm/LoginForm';
 import RegisterForm from '@/components/RegisterForm/RegisterForm';
+import ActionAlert from '../ActionAlert/ActionAlert';
 
 import styles from './RegisterLoginModal.module.css';
+import { errorMessage } from '/src/utils/services/makeRequest';
 
 function RegisterLoginModal() {
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [firebaseError, setFirebaseError] = useState(true);
+  const [errorText, setErrorText] = useState('error');
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleFirebaseError = () => setFirebaseError((prevError) => !prevError);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -28,7 +34,6 @@ function RegisterLoginModal() {
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
       >
         <Box
           className={styles.registerLoginModal__wrapper}
@@ -38,6 +43,7 @@ function RegisterLoginModal() {
         >
           <RegisterLoginHeader checked={checked} onChange={handleChange} />
           {checked ? <RegisterForm /> : <LoginForm />}
+          {firebaseError ? <ActionAlert children={errorMessage} /> : null}
         </Box>
       </Modal>
     </>
