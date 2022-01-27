@@ -11,7 +11,6 @@
 }
 
 .location {
-  width: 362px;
   height: 53.5px;
   margin-right: 10px !important;
 }
@@ -24,18 +23,15 @@
 }
 
 .icoLocat {
-  color: #22a6b3;
+  color: var(--turquoise-color);
   font-size: 35px !important;
 }
 
 @media screen and (min-width: 300px) {
-  .mapContainer form {
-    display: contents;
-  }
-
   .location {
-    width: 90%;
+    width: 75%;
     margin-right: 0px !important;
+    margin-bottom: 10px !important;
   }
 }
 
@@ -47,17 +43,15 @@
     width: 250px;
     height: 53.5px;
     margin-right: 10px !important;
+    margin-bottom: 0px !important;
   }
 }
 
 @media screen and (min-width: 900px) {
-  .mapContainer form {
-    display: contents;
-  }
-
   .location {
     width: 90%;
     margin-right: 0px !important;
+    margin-bottom: 10px !important;
   }
 }
 
@@ -68,6 +62,7 @@
   .location {
     width: 250px;
     margin-right: 10px !important;
+    margin-bottom: 0px !important;
   }
 }
 

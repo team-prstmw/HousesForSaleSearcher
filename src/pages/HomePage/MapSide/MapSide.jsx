@@ -1,21 +1,22 @@
 import { LocationOn } from '@material-ui/icons';
 import { Box, Button, styled, TextField, Typography } from '@mui/material';
 
+import theme from '../../../theme/theme';
 import styles from './MapSide.module.css';
 
-const ButtonSerch = styled(Button)({
-  color: '#535C6899',
+const ButtonSearch = styled(Button)({
+  color: theme.palette.primary.grey,
   lineHeight: '16px',
   height: '54px',
   letterSpacing: '1.25px',
   borderColor: '#0000001F',
   '&:hover': {
-    backgroundColor: '#FFF',
-    borderColor: '#000000',
+    backgroundColor: theme.palette.primary.contrastText,
+    borderColor: theme.palette.primary.bgDark,
   },
   '&:active': {
-    backgroundColor: '#FFF',
-    borderColor: '#000000',
+    backgroundColor: theme.palette.primary.contrastText,
+    borderColor: theme.palette.primary.bgDark,
   },
 });
 
@@ -30,9 +31,9 @@ function MapHouses() {
             endAdornment: <LocationOn className={styles.icoLocat} />,
           }}
         />
-        <ButtonSerch
+        <ButtonSearch
           sx={{
-            width: { xs: '90%', sm: '250px', md: '90%', lg: '250px', xl: '362px' },
+            width: { xs: '75%', sm: '250px', md: '90%', lg: '250px', xl: '362px' },
             fontSize: { xs: '14px', md: '16px', lg: '18px' },
             marginBottom: { xs: '10px' },
           }}
@@ -40,7 +41,7 @@ function MapHouses() {
           onClick={() => {}}
         >
           <Typography className={styles.searchBy}>SEARCH BY</Typography>
-        </ButtonSerch>
+        </ButtonSearch>
       </Box>
       <Box
         component="img"

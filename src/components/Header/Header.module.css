@@ -1,9 +1,11 @@
+@import '../../theme/colors.css';
+
 .topBarContainer {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #535c684d;
+  border-bottom: 2px solid var(--border-color);
 }
 
 img {

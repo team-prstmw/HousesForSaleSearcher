@@ -1,3 +1,5 @@
+@import '../../../theme/colors.css';
+
 .housesComponent {
   margin-top: 22px;
 }
@@ -43,14 +45,14 @@
   line-height: 24px;
   letter-spacing: 0.15px;
   font-family: Roboto;
-  color: #535c68;
+  color: var(--text-color);
 }
 
 .price {
   font-family: Roboto;
   margin: 0;
   padding: 5px 0 10px 10px;
-  color: #535c68;
+  color: var(--text-color);
   font-size: 12px;
   line-height: 17px;
 }
@@ -72,14 +74,12 @@
 
 .moreInfo {
   padding: 0;
-  margin-top: 22px;
-  margin-bottom: 29px;
-  margin-left: 10px;
-  color: #22a6b3;
+  margin: 22px 0 29px 10px;
+  color: var(--turquoise-color);
 }
 
 .moreInfo:hover {
-  background-color: #fff;
+  background-color: var(--white-color);
 }
 
 .icon {
@@ -88,7 +88,7 @@
   padding: 0 !important;
   padding-top: 7px !important;
   text-align: right;
-  background-color: #fff;
+  background-color: var(--white-color);
 }
 
 .sortBy {
@@ -155,7 +155,7 @@
 
 @media screen and (min-width: 900px) {
   .housesComponent {
-    border-left: 2px solid #535c684d;
+    border-left: 2px solid var(--border-color);
   }
   .houseElement {
     margin-right: 5px;

@@ -3,9 +3,12 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 
-import styles from './TopBar.module.css';
+import Logo from '../../assets/images/NavLogo.png';
+import theme from '../../theme/theme';
+import styles from './Header.module.css';
 
-const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+// eslint-disable-next-line no-shadow
+const ThemeSwitcher = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -52,19 +55,19 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const SingBtn = styled(Button)({
-  color: '#535C6899',
+const SignInButton = styled(Button)({
+  color: theme.palette.primary.muted,
   lineHeight: '16px',
-  border: '2px solid #535C6899',
+  border: `2px solid ${theme.palette.primary.muted}`,
   letterSpacing: 1.25,
   fontWeight: 'bold',
   '&:hover': {
     backgroundColor: '#fff',
-    borderColor: '#535C6899',
+    borderColor: theme.palette.primary.muted,
   },
 });
 
-function TopBar() {
+function Header() {
   return (
     <Box
       component="div"
@@ -73,9 +76,9 @@ function TopBar() {
         bgcolor: 'background.default',
       }}
     >
-      <MaterialUISwitch className={styles.switch} />
-      <Box component="img" src="\src\assets\images\NavLogo.png" />
-      <SingBtn
+      <ThemeSwitcher className={styles.switch} />
+      <Box component="img" src={Logo} />
+      <SignInButton
         sx={{
           marginRight: { xs: '0.8rem', md: '3rem', lg: '3.75rem' },
           width: { xs: '80px', md: '105px', lg: '130px' },
@@ -85,9 +88,9 @@ function TopBar() {
         }}
       >
         SIGN IN
-      </SingBtn>
+      </SignInButton>
     </Box>
   );
 }
 
-export default TopBar;
+export default Header;
