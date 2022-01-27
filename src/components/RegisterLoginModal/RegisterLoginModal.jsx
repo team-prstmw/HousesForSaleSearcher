@@ -9,18 +9,20 @@ import RegisterForm from '@/components/RegisterForm/RegisterForm';
 import ActionAlert from '../ActionAlert/ActionAlert';
 
 import styles from './RegisterLoginModal.module.css';
-import { errorMessage } from '/src/utils/services/makeRequest';
+import mapError from '/src/utils/services/mapError';
 
 function RegisterLoginModal() {
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
-  const [firebaseError, setFirebaseError] = useState(true);
-  const [errorText, setErrorText] = useState('error');
+
+  const [state, setState] = useState('');
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleFirebaseError = () => setFirebaseError((prevError) => !prevError);
+  const changeState = (state) => {
+    setState(mapError(state));
+  };
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -42,8 +44,8 @@ function RegisterLoginModal() {
           }}
         >
           <RegisterLoginHeader checked={checked} onChange={handleChange} />
-          {checked ? <RegisterForm /> : <LoginForm />}
-          {firebaseError ? <ActionAlert children={errorMessage} /> : null}
+          {checked ? <RegisterForm fn={changeState} /> : <LoginForm fn={changeState} />}
+          {state ? <ActionAlert fn={setState} children={state} /> : null}
         </Box>
       </Modal>
     </>

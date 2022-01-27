@@ -26,7 +26,8 @@ import { loginSchema } from '/src/schemas/authSchemas';
 import styles from '/src/components/LoginForm/LoginForm.module.css';
 
 function LoginForm(props) {
-  const [loginError, setLoginError] = React.useState(false);
+  const { fn, ...otherProps } = props;
+
   const [values, setValues] = React.useState({
     password: '',
     showPassword: false,
@@ -58,7 +59,7 @@ function LoginForm(props) {
   };
 
   const onSubmit = ({ email, password }) => {
-    signInSignUp(email, password, SIGN_IN_URL);
+    signInSignUp(email, password, SIGN_IN_URL, fn);
   };
   return (
     <Box
@@ -139,13 +140,7 @@ function LoginForm(props) {
             </FormControl>
           )}
         />
-        <Button
-          color="primary"
-          type="submit"
-          variant="contained"
-          onClick={handleSubmit(onSubmit)}
-          className={styles.loginButton}
-        >
+        <Button color="primary" type="submit" variant="contained" className={styles.loginButton}>
           LOG IN
         </Button>
       </Stack>

@@ -24,6 +24,7 @@ import { registerSchema } from '/src/schemas/authSchemas';
 import styles from '/src/components/RegisterForm/RegisterForm.module.css';
 
 function RegisterForm(props) {
+  const { fn, ...otherProps } = props;
   const [values, setValues] = useState({
     password: '',
     showPassword: false,
@@ -55,7 +56,7 @@ function RegisterForm(props) {
   };
 
   const onSubmit = ({ email, password }) => {
-    signInSignUp(email, password, SIGN_UP_URL);
+    signInSignUp(email, password, SIGN_UP_URL, fn);
   };
   return (
     <Box className={styles.registerForm__wrapper} component="form" onSubmit={handleSubmit(onSubmit)}>
@@ -145,13 +146,7 @@ function RegisterForm(props) {
             </FormControl>
           )}
         />
-        <Button
-          color="primary"
-          type="submit"
-          variant="contained"
-          onClick={handleSubmit(onSubmit)}
-          className={styles.registerButton}
-        >
+        <Button color="primary" type="submit" variant="contained" className={styles.registerButton}>
           REGISTER
         </Button>
       </Stack>
