@@ -1,0 +1,14 @@
+.textField {
+  width: 327px;
+  height: 55px;
+  border-radius: 4px;
+}
+
+.loginButton {
+  width: 224px;
+  height: 36px;
+}
+
+.stack__wrapper {
+  align-items: center;
+}

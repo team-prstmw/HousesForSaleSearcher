@@ -1,4 +1,7 @@
 // import './App.css';
+import React from 'react';
+
+import RegisterLoginModal from '/src/components/RegisterLoginModal/RegisterLoginModal';
 
 import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -8,6 +11,7 @@ import SellHousePage from './pages/SellHousePage/SellHousePage';
 import theme from './theme/theme';
 
 function App() {
+  const [LoggedIn, setLoggedIn] = React.useState(false);
   return (
     <BrowserRouter>
       <div className="App">
