@@ -1,15 +1,17 @@
+import CloseIcon from '@mui/icons-material/Close';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import Modal from '@mui/material/Modal';
 import { useState } from 'react';
 
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import RegisterLoginHeader from '@/components/RegisterLoginHeader/RegisterLoginHeader';
+import mapError from '/src/utils/services/mapError';
 import LoginForm from '@/components/LoginForm/LoginForm';
 import RegisterForm from '@/components/RegisterForm/RegisterForm';
-import ActionAlert from '../ActionAlert/ActionAlert';
+import RegisterLoginHeader from '@/components/RegisterLoginHeader/RegisterLoginHeader';
 
+import ActionAlert from '../ActionAlert/ActionAlert';
 import styles from './RegisterLoginModal.module.css';
-import mapError from '/src/utils/services/mapError';
 
 function RegisterLoginModal() {
   const [open, setOpen] = useState(false);
@@ -43,7 +45,10 @@ function RegisterLoginModal() {
             bgcolor: 'background.paper',
           }}
         >
-          <RegisterLoginHeader checked={checked} onChange={handleChange} />
+          <IconButton aria-label="Close" className={styles.closeButton} onClick={handleClose}>
+            <CloseIcon />
+          </IconButton>
+          <RegisterLoginHeader checked={checked} onChange={handleChange} onClick={handleClose} />
           {checked ? <RegisterForm fn={changeState} /> : <LoginForm fn={changeState} />}
           {state ? <ActionAlert fn={setState} children={state} /> : null}
         </Box>

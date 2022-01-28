@@ -17,6 +17,9 @@
   width: 224px;
   height: 36px;
 }
+.resetPasswordButton {
+  font-size: 120px;
+}
 
 .stack__wrapper {
   align-items: center;

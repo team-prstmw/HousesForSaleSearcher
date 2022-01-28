@@ -19,6 +19,12 @@ const mapError = (state) => {
     case 'USER_DISABLED':
       errorMessage = 'The user account has been disabled by an administrator.';
       break;
+    case 'EMAIL_NOT_FOUND':
+      errorMessage = 'There is no user record corresponding to this identifier. The user may have been deleted.';
+      break;
+    case 'MISSING_EMAIL':
+      errorMessage = 'The user did not enter email in the text field.';
+      break;
     default:
       errorMessage = 'An undefined Error happened.';
   }

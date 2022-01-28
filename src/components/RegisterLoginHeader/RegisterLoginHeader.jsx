@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
+import Typography from '@mui/material/Typography';
 
 import styles from '/src/components/RegisterLoginHeader/RegisterLoginHeader.module.css';
 
@@ -16,6 +16,7 @@ function RegisterLoginHeader({ checked, onChange }) {
       >
         Welcome!
       </Typography>
+
       <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
         <Typography>Log in</Typography>
         <Switch checked={checked} onChange={onChange} inputProps={{ 'aria-label': 'Login Register Switch' }} />
