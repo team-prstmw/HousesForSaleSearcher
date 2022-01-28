@@ -1,10 +1,9 @@
 import { Switch } from '@mui/material';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 
 import Logo from '../../assets/images/NavLogo.png';
-import theme from '../../theme/theme';
+import RegisterLoginModal from '../RegisterLoginModal/RegisterLoginModal';
 import styles from './Header.module.scss';
 
 // eslint-disable-next-line no-shadow
@@ -55,18 +54,6 @@ const ThemeSwitcher = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const SignInButton = styled(Button)({
-  color: theme.palette.primary.muted,
-  lineHeight: '16px',
-  border: `2px solid ${theme.palette.primary.muted}`,
-  letterSpacing: 1.25,
-  fontWeight: 'bold',
-  '&:hover': {
-    backgroundColor: '#fff',
-    borderColor: theme.palette.primary.muted,
-  },
-});
-
 function Header() {
   return (
     <Box
@@ -78,17 +65,7 @@ function Header() {
     >
       <ThemeSwitcher className={styles.switch} />
       <Box component="img" src={Logo} />
-      <SignInButton
-        sx={{
-          marginRight: { xs: '0.8rem', md: '3rem', lg: '3.75rem' },
-          width: { xs: '80px', md: '105px', lg: '130px' },
-          height: { xs: '35px', md: '45px', lg: '55px' },
-          fontSize: { xs: '14px', md: '17px', lg: '20px' },
-          padding: { xs: '0px', md: '5px 7px', lg: '10px 14px' },
-        }}
-      >
-        SIGN IN
-      </SignInButton>
+      <RegisterLoginModal />
     </Box>
   );
 }
