@@ -32,6 +32,7 @@
     "react-hook-form": "7.22.5",
     "react-query": "3.34.7",
     "react-router-dom": "6",
+    "sass": "1.49.0",
     "styled-components": "5.3.3",
     "validator": "13.7.0"
   },

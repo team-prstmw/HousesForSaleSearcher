@@ -1,4 +1,5 @@
-@import '../../theme/colors.css';
+@import '/src/theme/colors.css';
+@import '/src/theme/breakpoint.scss';
 
 .topBarContainer {
   display: flex;
@@ -12,7 +13,7 @@ img {
   align-self: flex-end;
 }
 
-@media screen and (min-width: 300px) {
+@media screen and (min-width: $screen-xs) {
   .topBarContainer {
     height: 80px;
   }
@@ -26,7 +27,7 @@ img {
   }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: $screen-sm) {
   .topBarContainer {
     height: 90px;
   }
@@ -38,7 +39,7 @@ img {
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: $screen-lg) {
   .topBarContainer {
     height: 106px;
   }

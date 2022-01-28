@@ -5,7 +5,7 @@ import { Autocomplete, Box, Button, Checkbox, TextField } from '@mui/material';
 import Chip from '@mui/material/Chip';
 import React from 'react';
 
-import styles from './ListOfHouses.module.css';
+import styles from './ListOfHouses.module.scss';
 
 const options = ['Option 1', 'Option 2'];
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -50,7 +50,7 @@ function ListOfHouses() {
         <Box component="div" className={styles.houseElement}>
           <h4>420 Baker St, London</h4>
           <p className={styles.price}>299,999£</p>
-          <img src="\src\assets\images\House.png" alt="Pomocniczy obraz" />
+          <img src="\src\assets\images\House.png" alt="House" />
           <p className={styles.shortInfo}>2 bds 1 ba 1555 sqft - Apartament for sale</p>
           <Button className={styles.moreInfo}>more info</Button>
           <Checkbox
@@ -64,7 +64,7 @@ function ListOfHouses() {
         <Box component="div" className={styles.houseElement}>
           <h4>420 Baker St, London</h4>
           <p className={styles.price}>299,999£</p>
-          <img src="\src\assets\images\House.png" alt="Pomocniczy obraz" />
+          <img src="\src\assets\images\House.png" alt="House" />
           <p className={styles.shortInfo}>2 bds 1 ba 1555 sqft - Apartament for sale</p>
           <Button className={styles.moreInfo}>more info</Button>
           <Checkbox
@@ -78,7 +78,7 @@ function ListOfHouses() {
         <Box component="div" className={styles.houseElement}>
           <h4>420 Baker St, London</h4>
           <p className={styles.price}>299,999£</p>
-          <img src="\src\assets\images\House.png" alt="Pomocniczy obraz" />
+          <img src="\src\assets\images\House.png" alt="House" />
           <p className={styles.shortInfo}>2 bds 1 ba 1555 sqft - Apartament for sale</p>
           <Button className={styles.moreInfo}>more info</Button>
           <Checkbox
@@ -92,7 +92,7 @@ function ListOfHouses() {
         <Box component="div" className={styles.houseElement}>
           <h4>420 Baker St, London</h4>
           <p className={styles.price}>299,999£</p>
-          <img src="\src\assets\images\House.png" alt="Pomocniczy obraz" />
+          <img src="\src\assets\images\House.png" alt="House" />
           <p className={styles.shortInfo}>2 bds 1 ba 1555 sqft - Apartament for sale</p>
           <Button className={styles.moreInfo}>more info</Button>
           <Checkbox

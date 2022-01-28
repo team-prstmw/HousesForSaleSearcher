@@ -16,10 +16,12 @@ function HomePage() {
   const [toggleHouse, setToggleHouse] = useState(true);
 
   useEffect(() => {
-    const media = window.matchMedia('(max-width: 900px)');
-    media.addEventListener('change', () => {
+    const mediaMobile = window.matchMedia('(max-width: 900px)');
+    // eslint-disable-next-line no-unused-expressions
+    mediaMobile.matches ? setToggleHouse(false) : setToggleHouse(true);
+    mediaMobile.addEventListener('change', () => {
       // eslint-disable-next-line no-unused-expressions
-      media.matches ? setToggleHouse(false) : setToggleHouse(true);
+      mediaMobile.matches ? setToggleHouse(false) : (setToggleHouse(true), setToggleMap(true));
     });
   }, []);
 

@@ -3,7 +3,7 @@ import '@fontsource/roboto/400.css';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { Box, Link } from '@mui/material';
 
-import styles from './Footer.module.css';
+import styles from './Footer.module.scss';
 
 function Footer() {
   return (

@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 
 import Logo from '../../assets/images/NavLogo.png';
 import theme from '../../theme/theme';
-import styles from './Header.module.css';
+import styles from './Header.module.scss';
 
 // eslint-disable-next-line no-shadow
 const ThemeSwitcher = styled(Switch)(({ theme }) => ({

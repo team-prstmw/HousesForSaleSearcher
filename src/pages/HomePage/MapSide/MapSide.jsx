@@ -2,7 +2,7 @@ import { LocationOn } from '@material-ui/icons';
 import { Box, Button, styled, TextField, Typography } from '@mui/material';
 
 import theme from '../../../theme/theme';
-import styles from './MapSide.module.css';
+import styles from './MapSide.module.scss';
 
 const ButtonSearch = styled(Button)({
   color: theme.palette.primary.grey,

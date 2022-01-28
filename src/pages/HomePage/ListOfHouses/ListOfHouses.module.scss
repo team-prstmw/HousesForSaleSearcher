@@ -1,4 +1,5 @@
-@import '../../../theme/colors.css';
+@import '/src/theme/colors.css';
+@import '/src/theme/breakpoint.scss';
 
 .housesComponent {
   margin-top: 22px;
@@ -141,19 +142,19 @@
   color: #6ab04cde;
 }
 
-@media screen and (min-width: 300px) {
+@media screen and (min-width: $screen-xs) {
   .housesComponent {
     border-left: none;
   }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: $screen-sm) {
   .houseElement {
     margin-right: 5px;
   }
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: $screen-md) {
   .housesComponent {
     border-left: 2px solid var(--border-color);
   }
@@ -162,7 +163,7 @@
   }
 }
 
-@media screen and (min-width: 1230px) {
+@media screen and (min-width: $screen-xl) {
   .houseElement {
     margin-right: 0px;
   }

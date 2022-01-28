@@ -1,3 +1,5 @@
+@import '/src/theme/breakpoint.scss';
+
 .mapContainer {
   display: flex;
   flex-direction: column;
@@ -27,7 +29,7 @@
   font-size: 35px !important;
 }
 
-@media screen and (min-width: 300px) {
+@media screen and (min-width: $screen-xs) {
   .location {
     width: 75%;
     margin-right: 0px !important;
@@ -35,7 +37,7 @@
   }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: $screen-sm) {
   .mapContainer form {
     display: unset;
   }
@@ -47,7 +49,7 @@
   }
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: $screen-md) {
   .location {
     width: 90%;
     margin-right: 0px !important;
@@ -55,7 +57,7 @@
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: $screen-lg) {
   .mapContainer form {
     display: unset;
   }
@@ -66,7 +68,7 @@
   }
 }
 
-@media screen and (min-width: 1536px) {
+@media screen and (min-width: $screen-xxl) {
   .location {
     width: 362px;
   }

@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import theme from '../../../theme/theme';
 // eslint-disable-next-line import/no-cycle
 import { changePageContext } from '../HomePage';
-import styles from './changePage.module.css';
+import styles from './changePage.module.scss';
 
 const ChangerButton = styled(Button)({
   flexDirection: 'column',
@@ -15,9 +15,12 @@ const ChangerButton = styled(Button)({
   height: '56px',
   backgroundColor: theme.palette.primary.main,
   borderRadius: '0px',
-  borderColor: `${theme.palette.secondary.btnChangePage} !important`,
+  borderRight: 'none',
   '&:hover': {
-    backgroundColor: theme.palette.secondary.btnChangePage,
+    backgroundColor: 'none !important',
+  },
+  '&:focus': {
+    backgroundColor: 'none',
   },
 });
 
@@ -29,8 +32,8 @@ function ChangePage() {
         <ChangerButton
           onClick={() => {
             if (!toggleMap) {
-              setToggleMap(!toggleMap);
-              setToggleHouse(!toggleHouse);
+              setToggleMap(true);
+              setToggleHouse(false);
             }
           }}
         >
@@ -40,8 +43,8 @@ function ChangePage() {
         <ChangerButton
           onClick={() => {
             if (!toggleHouse) {
-              setToggleHouse(!toggleHouse);
-              setToggleMap(!toggleMap);
+              setToggleHouse(true);
+              setToggleMap(false);
             }
           }}
         >
