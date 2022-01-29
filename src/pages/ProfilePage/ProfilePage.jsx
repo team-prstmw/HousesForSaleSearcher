@@ -10,23 +10,13 @@ import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
+
+import { profilePageSchema } from '/src/schemas/authSchemas';
 
 import EditButtons from './components/EditButtons/EditButtons';
 import FormRow from './components/FormRow/FormRow';
 import TextInput from './components/TextInput/TextInput';
 import styles from './ProfilePage.module.css';
-
-const REQUIRED_ERROR = 'This field is required.';
-const SPECIAL_CHARACTERS_ERROR = 'No special characters allowed.';
-
-const schema = yup.object({
-  name: yup
-    .string()
-    .required(REQUIRED_ERROR)
-    .matches(/^[A-Za-z0-9 ]+$/, SPECIAL_CHARACTERS_ERROR),
-  password: yup.string(),
-});
 
 const ProfilePage = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -40,7 +30,7 @@ const ProfilePage = () => {
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
-    resolver: yupResolver(schema),
+    resolver: yupResolver(profilePageSchema),
   });
 
   const handleChange = (event, newValue) => {
