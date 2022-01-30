@@ -9,8 +9,11 @@ export const resetPassword = async (email, signURL, changeState) => {
     }),
   });
   const data = await response.json();
-  if (response.status !== 200) {
+  if (response.ok) {
+    changeState('SUCCESS');
+  } else {
     changeState(data.error.message);
   }
+
   return data;
 };

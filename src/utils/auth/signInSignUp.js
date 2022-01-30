@@ -10,7 +10,7 @@ export const signInSignUp = async (email, password, signURL, changeState) => {
     }),
   });
   const data = await response.json();
-  if (response.status !== 200) {
+  if (!response.ok) {
     changeState(data.error.message);
   }
   return data;

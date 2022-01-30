@@ -2,6 +2,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
 
 import styles from '/src/components/RegisterLoginHeader/RegisterLoginHeader.module.css';
 
@@ -25,5 +26,10 @@ function RegisterLoginHeader({ checked, onChange }) {
     </Box>
   );
 }
+
+RegisterLoginHeader.propTypes = {
+  checked: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default RegisterLoginHeader;

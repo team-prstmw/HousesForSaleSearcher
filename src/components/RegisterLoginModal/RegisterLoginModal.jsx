@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 import { useState } from 'react';
 
-import mapError from '/src/utils/services/mapError';
+import mapError from '/src/utils/mapError';
 import LoginForm from '@/components/LoginForm/LoginForm';
 import RegisterForm from '@/components/RegisterForm/RegisterForm';
 import RegisterLoginHeader from '@/components/RegisterLoginHeader/RegisterLoginHeader';
@@ -22,14 +22,13 @@ function RegisterLoginModal() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const changeState = (state) => {
-    setState(mapError(state));
+  const changeState = (stateToChange) => {
+    setState(mapError(stateToChange));
   };
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
-
   return (
     <>
       <Button onClick={handleOpen}>Sign in</Button>
@@ -50,7 +49,15 @@ function RegisterLoginModal() {
           </IconButton>
           <RegisterLoginHeader checked={checked} onChange={handleChange} onClick={handleClose} />
           {checked ? <RegisterForm fn={changeState} /> : <LoginForm fn={changeState} />}
-          {state ? <ActionAlert fn={setState} children={state} /> : null}
+          {state === 'Success' ? (
+            <ActionAlert severity="success" fn={setState}>
+              {state}
+            </ActionAlert>
+          ) : state ? (
+            <ActionAlert severity="error" fn={setState}>
+              {state}
+            </ActionAlert>
+          ) : null}
         </Box>
       </Modal>
     </>
