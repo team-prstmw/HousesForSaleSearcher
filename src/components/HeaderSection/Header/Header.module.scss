@@ -1,4 +1,4 @@
-@import '/src/theme/colors.css';
+@import '/src/theme/colors.scss';
 @import '/src/theme/breakpoint.scss';
 
 .topBarContainer {
@@ -6,7 +6,7 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid var(--border-color);
+  border-bottom: 2px solid $lightGrey;
 }
 
 img {

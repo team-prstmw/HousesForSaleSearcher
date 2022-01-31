@@ -4,10 +4,10 @@
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-}
 
-.buttonContainer p {
-  margin: 0;
+  p {
+    margin: 0;
+  }
 }
 
 @media screen and (min-width: $screen-xs) {

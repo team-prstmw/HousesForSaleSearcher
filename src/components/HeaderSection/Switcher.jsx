@@ -1,12 +1,6 @@
 import { Switch } from '@mui/material';
-import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 
-import Logo from '../../assets/images/NavLogo.png';
-import RegisterLoginModal from '../RegisterLoginModal/RegisterLoginModal';
-import styles from './Header.module.scss';
-
-// eslint-disable-next-line no-shadow
 const ThemeSwitcher = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
@@ -54,20 +48,4 @@ const ThemeSwitcher = styled(Switch)(({ theme }) => ({
   },
 }));
 
-function Header() {
-  return (
-    <Box
-      component="div"
-      className={styles.topBarContainer}
-      sx={{
-        bgcolor: 'background.default',
-      }}
-    >
-      <ThemeSwitcher className={styles.switch} />
-      <Box component="img" src={Logo} />
-      <RegisterLoginModal />
-    </Box>
-  );
-}
-
-export default Header;
+export default ThemeSwitcher;

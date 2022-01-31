@@ -10,7 +10,6 @@ const theme = createTheme({
     },
     secondary: {
       main: '#30336B',
-      btnChangePage: '#37d1e2',
     },
     error: {
       main: '#EB4D4B',

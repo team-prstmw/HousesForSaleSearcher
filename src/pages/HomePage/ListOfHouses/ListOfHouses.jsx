@@ -12,7 +12,6 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function ListOfHouses() {
   const [value, setValue] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState('');
 
   const handleDelete = () => {
     setValue(null);
@@ -29,10 +28,6 @@ function ListOfHouses() {
             value={value}
             onChange={(event, newValue) => {
               setValue(newValue);
-            }}
-            inputValue={inputValue}
-            onInputChange={(event, newInputValue) => {
-              setInputValue(newInputValue);
             }}
             options={options}
             renderInput={(params) => <TextField {...params} />}
