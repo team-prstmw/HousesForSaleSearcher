@@ -5,9 +5,9 @@ import Typography from '@mui/material/Typography';
 
 import AddHouseForm from '@/components/AddHouseForm/AddHouseForm';
 
-import styles from './SellHousePage.module.css';
+import styles from './SellHouseView.module.css';
 
-const SellHousePage = () => {
+const SellHouseView = () => {
   const theme = useTheme();
   return (
     <Container component={Paper} maxWidth={false} className={styles.shpContainer}>
@@ -31,4 +31,4 @@ const SellHousePage = () => {
   );
 };
 
-export default SellHousePage;
+export default SellHouseView;

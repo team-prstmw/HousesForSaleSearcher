@@ -1,13 +1,13 @@
 import './App.css';
 
 import { ThemeProvider } from '@mui/material/styles';
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import RegisterLoginModal from '/src/components/RegisterLoginModal/RegisterLoginModal';
 
 import ProfilePage from './pages/ProfilePage/ProfilePage';
-import SellHousePage from './pages/SellHousePage/SellHousePage';
+import AccountSettingsView from './pages/ProfilePage/views/AccountSettingsView/AccountSettingsView';
+import SellHouseView from './pages/ProfilePage/views/SellHouseView/SellHouseView';
 import theme from './theme/theme';
 
 function App() {
@@ -18,9 +18,14 @@ function App() {
           {/* <RegisterLoginModal /> */}
           <Routes>
             <Route path="/" element={<h1>INDEX PAGE</h1>} />
-            <Route path="/user" element={<ProfilePage />} />
+            <Route path="/user" element={<ProfilePage />}>
+              <Route path="" exact element={<AccountSettingsView />} />
+              <Route path="favourites" exact element={<div>favorites</div>} />
+              <Route path="my-houses" exact element={<div>my house</div>} />
+              <Route path="sell-house" exact element={<SellHouseView />} />
+            </Route>
             <Route path="/favorites" element={<h1>FAVORITES</h1>} />
-            <Route path="/sell-house" element={<SellHousePage />} />
+            <Route path="/sell-house" element={<SellHouseView />} />
           </Routes>
         </ThemeProvider>
       </div>
