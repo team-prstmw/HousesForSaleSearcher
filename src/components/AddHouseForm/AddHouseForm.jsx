@@ -15,6 +15,12 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
+import * as yup from 'yup';
+import { useForm } from 'react-hook-form';
+import create from '../../utils/api/create';
+import storage from '../../firebase/firebase';
+import { storageRef } from '../../firebase/firebase';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 import styles from './AddHouseForm.module.css';
 import FacilityCheckbox from './components/FacilityCheckbox/FacilityCheckbox';
@@ -74,99 +80,59 @@ const AddHouseForm = () => {
   const [url, setUrl] = useState('');
   const [progress, setProgress] = useState(0);
 
-  // const imagesRef = ref(storage);
-  // const imagesRef = ref(storage, 'images/mountains.jpg');
+  const sendPhotos = (images) => {
+    images.forEach((element) => {
+      const file = element;
+      const metadata = { contentType: 'image/jpeg' }; // or whatever you want
+      const storageRef = ref(storage, 'images/' + file.name);
+      const uploadTask = uploadBytesResumable(storageRef, file, metadata);
 
-  const metadata = {
-    contentType: 'image/jpeg',
-  };
-  const storage = getStorage();
-  const imagesRef = ref(storage, 'houses');
+      // const storageRef = storage.ref();
+      // const uploadTask = storageRef.child(`images/${file.name}`);
+      // const uploadTask2 = uploadTask.put(file, metadata);
 
-  const handleUpload = async (event) => {
-    // if (!firebase) return;
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
+          }
+        },
+        (error) => {
+          // A full list of error codes is available at
+          // https://firebase.google.com/docs/storage/web/handle-errors
+          switch (error.code) {
+            case 'storage/unauthorized':
+              // User doesn't have permission to access the object
+              break;
+            case 'storage/canceled':
+              // User canceled the upload
+              break;
 
-    const uploadedFile = images[0];
-    console.log(uploadedFile);
-    if (!uploadedFile) return;
+            // ...
 
-    console.log('storage', storage);
-    console.log('storageref', imagesRef);
-
-    try {
-      await uploadBytes(imagesRef, uploadedFile, metadata);
-
-      alert('Successfully uploaded picture!');
-    } catch (error) {
-      console.log('error', error);
-    }
-  };
-
-  // const storage = getStorage();
-  getDownloadURL(ref(storage, 'houses/'))
-    .then((url) => {
-      // `url` is the download URL for 'images/stars.jpg'
-
-      // This can be downloaded directly:
-      const xhr = new XMLHttpRequest();
-      xhr.responseType = 'blob';
-      xhr.onload = (event) => {
-        const blob = xhr.response;
-      };
-      xhr.open('GET', url);
-      xhr.send();
-
-      // Or inserted into an <img> element
-      const img = document.getElementById('myimg');
-      img.setAttribute('src', url);
-    })
-    .catch((error) => {
-      // Handle any errors
+            case 'storage/unknown':
+              // Unknown error occurred, inspect error.serverResponse
+              break;
+          }
+        },
+        () => {
+          // Upload completed successfully, now we can get the download URL
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log('File available at', downloadURL);
+          });
+        }
+      );
     });
-
-  // uploadTask.on(
-  //   'state_changed',
-  //   (snapshot) => {
-  //     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-  //     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //     console.log('Upload is ' + progress + '% done');
-  //     switch (snapshot.state) {
-  //       case 'paused':
-  //         console.log('Upload is paused');
-  //         break;
-  //       case 'running':
-  //         console.log('Upload is running');
-  //         break;
-  //     }
-  //   },
-  //   (error) => {
-  //     // A full list of error codes is available at
-  //     // https://firebase.google.com/docs/storage/web/handle-errors
-  //     switch (error.code) {
-  //       case 'storage/unauthorized':
-  //         // User doesn't have permission to access the object
-  //         break;
-  //       case 'storage/canceled':
-  //         // User canceled the upload
-  //         break;
-
-  //       // ...
-
-  //       case 'storage/unknown':
-  //         // Unknown error occurred, inspect error.serverResponse
-  //         break;
-  //     }
-  //   },
-  //   () => {
-  //     // Upload completed successfully, now we can get the download URL
-  //     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-  //       console.log('File available at', downloadURL);
-  //     });
-  //   }
-  // );
-
-  // console.log('image: ', images);
-
+  };
   const {
     register,
     handleSubmit,
@@ -183,7 +149,15 @@ const AddHouseForm = () => {
   const removeImage = (name) => setImages((prevState) => prevState?.filter((img) => img.name !== name));
 
   const handleSend = (fields) => {
+    // const data = { houseData: fields, photos: [] };
+    fields.photos = { ...[images] };
     console.log({ fields });
+    // console.log(images);
+    // data['photos'].push(images);
+    // console.log(data.photos);
+    // const obj1 = { images, fields };
+    sendPhotos(images);
+    create('houses', fields);
   };
 
   const facilities = [
@@ -287,7 +261,7 @@ const AddHouseForm = () => {
               labelId="property-type"
               id="property-type-select"
               label="Type of property"
-              defaultValue="sda"
+              defaultValue=""
               {...register('propertyType')}
               helperText={errors?.propertyType && errors?.propertyType.message}
             >
@@ -367,7 +341,7 @@ const AddHouseForm = () => {
             labelId="heating"
             id="heating"
             label="Heating"
-            defaultValue="sadas"
+            defaultValue=""
             {...register('heating')}
             helperText={errors?.heating && errors?.heating.message}
           >

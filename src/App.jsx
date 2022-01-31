@@ -10,10 +10,9 @@ import { useState, useCallback, useEffect } from 'react';
 import { readAll } from './utils/api';
 
 import AddHouseForm from './components/AddHouseForm/AddHouseForm';
-import SellHousePage from './pages/SellHousePage/SellHousePage';
-import theme from './utils/theme';
-import SellHousePage from '/src/pages/SellHousePage/SellHousePage';
+
 import theme from '/src/theme/theme';
+import SellHousePage from '/src/pages/SellHousePage/SellHousePage';
 
 function App() {
   const [houses, setHouses] = useState(null);
@@ -51,7 +50,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <ThemeProvider theme={theme}>
-          <RegisterLoginModal />
+          <SellHousePage />
           {/* <Routes>
             <Route path="/" element={<h1>INDEX PAGE</h1>} />
             <Route path="/user" element={<h1>USER PAGE</h1>} />
