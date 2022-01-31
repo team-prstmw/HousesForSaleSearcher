@@ -1,10 +1,7 @@
 import './App.css';
 
 import { ThemeProvider } from '@mui/material/styles';
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
-import RegisterLoginModal from '/src/components/RegisterLoginModal/RegisterLoginModal';
 
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import SellHousePage from './pages/SellHousePage/SellHousePage';
@@ -15,7 +12,6 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <ThemeProvider theme={theme}>
-          {/* <RegisterLoginModal /> */}
           <Routes>
             <Route path="/" element={<h1>INDEX PAGE</h1>} />
             <Route path="/user" element={<ProfilePage />} />
