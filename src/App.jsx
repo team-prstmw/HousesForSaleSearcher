@@ -9,7 +9,7 @@ import SellHousePage from './pages/SellHousePage/SellHousePage';
 import theme from './theme/theme';
 
 function App() {
-  const [LoggedIn, setLoggedIn] = React.useState(false);
+  // const [LoggedIn, setLoggedIn] = React.useState(false);
   return (
     <BrowserRouter>
       <div className="App">
