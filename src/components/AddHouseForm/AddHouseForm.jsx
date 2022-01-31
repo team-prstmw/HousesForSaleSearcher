@@ -5,9 +5,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import FormHelperText from '@mui/material/FormHelperText';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -16,21 +14,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-// eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-
-import addHouseToDB from '../../utils/addHouseToDB';
-import storage from '../../firebase/firebase';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
-import { uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-// import getFirebase from 'firebase/storage';
-// import '../../assets/images/house';
-
-// import { storage } from '@src/firebase/firebase';
+import { useState } from 'react';
 
 import styles from './AddHouseForm.module.css';
+import FacilityCheckbox from './components/FacilityCheckbox/FacilityCheckbox';
 
 const schema = yup.object({
   streetNumber: yup
@@ -81,7 +68,7 @@ const schema = yup.object({
 });
 
 const AddHouseForm = () => {
-  const [moreFacilities, setMoreFacilities] = useState(false);
+  const [moreFacilitiesShown, setMoreFacilitiesShown] = useState(false);
   const [images, setImages] = useState();
 
   const [url, setUrl] = useState('');
@@ -197,9 +184,24 @@ const AddHouseForm = () => {
 
   const handleSend = (fields) => {
     console.log({ fields });
-    addHouseToDB({ fields });
-    handleUpload();
   };
+
+  const facilities = [
+    'Garage',
+    'Parking spot',
+    'Garden',
+    'Elevator',
+    'Basement',
+    'Loggy',
+    'Balcony',
+    'Terrace',
+    'Entresol',
+    'Playground',
+    'Internet',
+    'Swimming pool',
+    'Gym',
+    'Kitchenette',
+  ];
   return (
     <Box component="form" className={styles.formContainer} onSubmit={handleSubmit(handleSend)}>
       <div className={styles.formSection}>
@@ -381,30 +383,19 @@ const AddHouseForm = () => {
       </div>
       <Button
         variant="outlined"
-        onClick={() => setMoreFacilities((prevState) => !prevState)}
-        endIcon={moreFacilities ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        onClick={() => setMoreFacilitiesShown((prevState) => !prevState)}
+        endIcon={moreFacilitiesShown ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         sx={{ margin: '10px 0' }}
       >
         MORE FACILITIES
       </Button>
 
-      {moreFacilities && (
+      {moreFacilitiesShown && (
         <FormGroup>
           <span className={styles.moreParamsCheckbox}>
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Garage" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Parking spot" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Garden" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Elevator" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Basement" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Loggy" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Balcony" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Terrace" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Entresol" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Playground" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Internet" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Swimming pool" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Gym" />
-            <FormControlLabel sx={{ minWidth: '50%', margin: 0 }} control={<Checkbox />} label="Kitchenette" />
+            {facilities.map((facility) => (
+              <FacilityCheckbox key={facility} label={facility} />
+            ))}
           </span>
         </FormGroup>
       )}

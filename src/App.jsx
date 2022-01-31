@@ -1,4 +1,7 @@
 import './App.css';
+import React from 'react';
+
+import RegisterLoginModal from '/src/components/RegisterLoginModal/RegisterLoginModal';
 
 import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -9,11 +12,14 @@ import { readAll } from './utils/api';
 import AddHouseForm from './components/AddHouseForm/AddHouseForm';
 import SellHousePage from './pages/SellHousePage/SellHousePage';
 import theme from './utils/theme';
+import SellHousePage from '/src/pages/SellHousePage/SellHousePage';
+import theme from '/src/theme/theme';
 
 function App() {
   const [houses, setHouses] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [LoggedIn, setLoggedIn] = React.useState(false);
 
   const handleAsyncAction = React.useCallback(async (asyncAction) => {
     setLoading(() => true);
@@ -45,11 +51,10 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <ThemeProvider theme={theme}>
-          <AddHouseForm />
+          <RegisterLoginModal />
           {/* <Routes>
             <Route path="/" element={<h1>INDEX PAGE</h1>} />
             <Route path="/user" element={<h1>USER PAGE</h1>} />
-            <Route path="/addhouse" element={<h1>ADD_HOUSE PAGE</h1>} />
             <Route path="/favorites" element={<h1>FAVORITES</h1>} />
             <Route path="/sell-house" element={<SellHousePage />} />
           </Routes> */}
