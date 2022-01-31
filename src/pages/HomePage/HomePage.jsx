@@ -1,57 +1,46 @@
+/* eslint-disable import/no-absolute-path */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { createContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
-// eslint-disable-next-line import/no-cycle
-import ChangePage from './ChangePage/changePage';
+import Footer from '/src/components/Footer/Footer';
+import Header from '/src/components/HeaderSection/Header/Header';
+
+import ChangeView from './ChangeView/ChangeView';
 import ListOfHouses from './ListOfHouses/ListOfHouses';
 import MapHouses from './MapSide/MapSide';
 
-export const changePageContext = createContext(null);
-
 function HomePage() {
-  const [toggleMap, setToggleMap] = useState(true);
-  const [toggleHouse, setToggleHouse] = useState(true);
-
-  useEffect(() => {
-    const mediaMobile = window.matchMedia('(max-width: 900px)');
-    // eslint-disable-next-line no-unused-expressions
-    mediaMobile.matches ? setToggleHouse(false) : setToggleHouse(true);
-    mediaMobile.addEventListener('change', () => {
-      // eslint-disable-next-line no-unused-expressions
-      mediaMobile.matches ? setToggleHouse(false) : (setToggleHouse(true), setToggleMap(true));
-    });
-  }, []);
+  const [toggleView, setToggleView] = useState(true);
 
   return (
-    <changePageContext.Provider value={{ toggleMap, setToggleMap, toggleHouse, setToggleHouse }}>
-      <Grid container>
-        <Grid item xs={12} marginBottom="38px">
-          <Header />
-        </Grid>
-        <Box
-          component="div"
-          sx={{
-            display: { md: 'flex' },
-            maxWidth: '1750px',
-            margin: 'auto',
-          }}
-        >
-          <Grid item xs={12} md={6}>
-            {toggleMap && <MapHouses />}
-          </Grid>
-          <Grid item xs={12} md={6}>
-            {toggleHouse && <ListOfHouses />}
-          </Grid>
-        </Box>
-        <Grid item xs={12} marginTop="28px">
-          <ChangePage />
-          <Footer />
-        </Grid>
+    <Grid sx={{ display: 'flex', flexDirection: 'column' }} height="100vh">
+      <Grid item xs={12} marginBottom="38px" sx={{ flexBasis: { xs: '0' } }}>
+        <Header />
       </Grid>
-    </changePageContext.Provider>
+      <Box
+        component="div"
+        sx={{
+          display: { md: 'flex' },
+          maxWidth: '1750px',
+          flexBasis: '100%',
+          margin: { md: 'auto' },
+        }}
+      >
+        <Grid item xs={12} md={6} sx={{ display: { xs: toggleView ? 'block' : 'none', md: 'block' } }}>
+          <MapHouses />
+        </Grid>
+        <Grid item xs={12} md={6} sx={{ display: { xs: toggleView ? 'none' : 'block', md: 'block' } }}>
+          <ListOfHouses />
+        </Grid>
+      </Box>
+      <Grid item xs={12} marginTop="28px" sx={{ flexBasis: { xs: '0' } }}>
+        <ChangeView isToggle={toggleView} isSetToggle={setToggleView} />
+        <Footer />
+      </Grid>
+    </Grid>
   );
 }
 

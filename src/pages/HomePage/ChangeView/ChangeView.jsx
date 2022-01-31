@@ -1,13 +1,14 @@
+/* eslint-disable import/no-absolute-path */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import MapIcon from '@mui/icons-material/Map';
 import SearchIcon from '@mui/icons-material/Search';
 import { Box, Button, ButtonGroup } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useContext } from 'react';
 
-import theme from '../../../theme/theme';
-// eslint-disable-next-line import/no-cycle
-import { changePageContext } from '../HomePage';
-import styles from './changePage.module.scss';
+import theme from '/src/theme/theme';
+
+import styles from './ChangeView.module.scss';
 
 const ChangerButton = styled(Button)({
   flexDirection: 'column',
@@ -24,16 +25,16 @@ const ChangerButton = styled(Button)({
   },
 });
 
-function ChangePage() {
-  const { toggleMap, setToggleMap, toggleHouse, setToggleHouse } = useContext(changePageContext);
+function ChangeView(props) {
+  const state = { ...props };
+
   return (
     <Box component="div" className={styles.buttonContainer}>
       <ButtonGroup variant="contained">
         <ChangerButton
           onClick={() => {
-            if (!toggleMap) {
-              setToggleMap(true);
-              setToggleHouse(false);
+            if (!state.isToggle) {
+              state.isSetToggle(true);
             }
           }}
         >
@@ -42,9 +43,8 @@ function ChangePage() {
         </ChangerButton>
         <ChangerButton
           onClick={() => {
-            if (!toggleHouse) {
-              setToggleHouse(true);
-              setToggleMap(false);
+            if (state.isToggle) {
+              state.isSetToggle(false);
             }
           }}
         >
@@ -56,4 +56,4 @@ function ChangePage() {
   );
 }
 
-export default ChangePage;
+export default ChangeView;

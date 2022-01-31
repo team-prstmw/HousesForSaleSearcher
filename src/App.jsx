@@ -1,10 +1,8 @@
-// import './App.css';
+import { ThemeProvider } from '@mui/material/styles';
 import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import RegisterLoginModal from '/src/components/RegisterLoginModal/RegisterLoginModal';
-
-import { ThemeProvider } from '@mui/material/styles';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import HomePage from './pages/HomePage/HomePage';
 import SellHousePage from './pages/SellHousePage/SellHousePage';

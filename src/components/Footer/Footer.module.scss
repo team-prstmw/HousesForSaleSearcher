@@ -1,4 +1,4 @@
-@import '/src/theme/colors.css';
+@import '/src/theme/colors.scss';
 @import '/src/theme/breakpoint.scss';
 
 .footerContainer {
@@ -7,7 +7,7 @@
   height: 129px;
   justify-content: center;
   align-items: center;
-  background-color: var(--bg-color);
+  background-color: $lightGrey;
   padding-left: 0;
 }
 
@@ -15,7 +15,7 @@
   font-weight: 400;
   text-align: center;
   font-family: Roboto;
-  color: var(--text-color) !important;
+  color: $text-color !important;
 }
 
 .footerText:hover {
