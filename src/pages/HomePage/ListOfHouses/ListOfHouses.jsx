@@ -3,15 +3,32 @@ import { Favorite, FavoriteBorder } from '@material-ui/icons';
 import DoneIcon from '@mui/icons-material/Done';
 import { Autocomplete, Box, Button, Checkbox, TextField } from '@mui/material';
 import Chip from '@mui/material/Chip';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './ListOfHouses.module.scss';
 
-const options = ['Option 1', 'Option 2'];
+const options = ['Cena rosnąco', 'Cena malejąco', 'Alfabetycznie'];
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function ListOfHouses() {
-  const [value, setValue] = React.useState(null);
+  const [value, setValue] = useState(null);
+  const [data, setData] = useState();
+
+  const getData = () => {
+    fetch('/houses-for-sale.json')
+      .then((response) => {
+        return response.json();
+      })
+      .then((myJson) => {
+        const obj = myJson.houses;
+        const arr = Object.entries(obj);
+        setData(arr);
+      });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const handleDelete = () => {
     setValue(null);
@@ -42,62 +59,26 @@ function ListOfHouses() {
       </Box>
 
       <Box component="div" className={styles.housesList}>
-        <Box component="div" className={styles.houseElement}>
-          <h4>420 Baker St, London</h4>
-          <p className={styles.price}>299,999£</p>
-          <img src="\src\assets\images\House.png" alt="House" />
-          <p className={styles.shortInfo}>2 bds 1 ba 1555 sqft - Apartament for sale</p>
-          <Button className={styles.moreInfo}>more info</Button>
-          <Checkbox
-            color="warning"
-            {...label}
-            icon={<FavoriteBorder />}
-            checkedIcon={<Favorite />}
-            className={styles.icon}
-          />
-        </Box>
-        <Box component="div" className={styles.houseElement}>
-          <h4>420 Baker St, London</h4>
-          <p className={styles.price}>299,999£</p>
-          <img src="\src\assets\images\House.png" alt="House" />
-          <p className={styles.shortInfo}>2 bds 1 ba 1555 sqft - Apartament for sale</p>
-          <Button className={styles.moreInfo}>more info</Button>
-          <Checkbox
-            color="warning"
-            {...label}
-            icon={<FavoriteBorder />}
-            checkedIcon={<Favorite />}
-            className={styles.icon}
-          />
-        </Box>
-        <Box component="div" className={styles.houseElement}>
-          <h4>420 Baker St, London</h4>
-          <p className={styles.price}>299,999£</p>
-          <img src="\src\assets\images\House.png" alt="House" />
-          <p className={styles.shortInfo}>2 bds 1 ba 1555 sqft - Apartament for sale</p>
-          <Button className={styles.moreInfo}>more info</Button>
-          <Checkbox
-            color="warning"
-            {...label}
-            icon={<FavoriteBorder />}
-            checkedIcon={<Favorite />}
-            className={styles.icon}
-          />
-        </Box>
-        <Box component="div" className={styles.houseElement}>
-          <h4>420 Baker St, London</h4>
-          <p className={styles.price}>299,999£</p>
-          <img src="\src\assets\images\House.png" alt="House" />
-          <p className={styles.shortInfo}>2 bds 1 ba 1555 sqft - Apartament for sale</p>
-          <Button className={styles.moreInfo}>more info</Button>
-          <Checkbox
-            color="warning"
-            {...label}
-            icon={<FavoriteBorder />}
-            checkedIcon={<Favorite />}
-            className={styles.icon}
-          />
-        </Box>
+        {data.map((item) => (
+          <Box component="div" className={styles.houseElement}>
+            <h4>
+              {item[1].city}, {item[1].streetName} {item[1].streetNumber}
+            </h4>
+            <p className={styles.price}>
+              {item[1].price}zł/m<sup>2</sup>
+            </p>
+            <img src="\src\assets\images\House.png" alt="House" />
+            <p className={styles.shortInfo}>{item[1].descriptionField}</p>
+            <Button className={styles.moreInfo}>more info</Button>
+            <Checkbox
+              color="warning"
+              {...label}
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+              className={styles.icon}
+            />
+          </Box>
+        ))}
       </Box>
     </Box>
   );

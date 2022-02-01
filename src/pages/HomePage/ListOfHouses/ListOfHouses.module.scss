@@ -14,29 +14,30 @@
   overflow-y: scroll;
 }
 
-.housesList::-webkit-scrollbar {
-  width: 10px;
-}
+// .housesList::-webkit-scrollbar {
+//   width: 10px;
+// }
 
-.housesList::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
+// .housesList::-webkit-scrollbar-track {
+//   background: #f1f1f1;
+//   border-radius: 10px;
+// }
 
-.housesList::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
+// .housesList::-webkit-scrollbar-thumb {
+//   background: #888;
+//   border-radius: 10px;
+// }
 
-.housesList::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+// .housesList::-webkit-scrollbar-thumb:hover {
+//   background: #555;
+// }
 
 .houseElement {
   border: 1px solid #d6d6d6;
   border-radius: 4px;
   margin-bottom: 7px;
   position: relative;
+  height: fit-content;
 
   h4 {
     margin: 0;
@@ -64,8 +65,8 @@
 
 .shortInfo {
   margin: 0;
-  padding-top: 16px;
-  text-align: center;
+  padding: 16px 0 0 5px;
+  text-align: left;
   font-size: 14px;
   line-height: 20px;
   font-family: Roboto;
