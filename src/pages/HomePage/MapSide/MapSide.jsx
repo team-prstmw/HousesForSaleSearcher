@@ -1,14 +1,9 @@
-/* eslint-disable import/no-absolute-path */
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import { LocationOn } from '@material-ui/icons';
 import { Box, Button, styled, TextField, Typography } from '@mui/material';
 
-import theme from '/src/theme/theme';
-
 import styles from './MapSide.module.scss';
 
-const ButtonSearch = styled(Button)({
+const ButtonSearch = styled(Button)(({ theme }) => ({
   color: theme.palette.primary.muted,
   lineHeight: '16px',
   height: '54px',
@@ -22,7 +17,7 @@ const ButtonSearch = styled(Button)({
     backgroundColor: theme.palette.primary.contrastText,
     borderColor: theme.palette.primary.bgDark,
   },
-});
+}));
 
 function MapHouses() {
   return (

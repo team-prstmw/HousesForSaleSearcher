@@ -14,11 +14,10 @@ import LoginForm from '@/components/LoginForm/LoginForm';
 import RegisterForm from '@/components/RegisterForm/RegisterForm';
 import RegisterLoginHeader from '@/components/RegisterLoginHeader/RegisterLoginHeader';
 
-import theme from '../../theme/theme';
 import ActionAlert from '../ActionAlert/ActionAlert';
 import styles from './RegisterLoginModal.module.css';
 
-const SignInButton = styled(Button)({
+const SignInButton = styled(Button)(({ theme }) => ({
   color: theme.palette.primary.muted,
   lineHeight: '16px',
   border: `2px solid ${theme.palette.primary.muted}`,
@@ -28,7 +27,7 @@ const SignInButton = styled(Button)({
     backgroundColor: '#fff',
     borderColor: theme.palette.primary.muted,
   },
-});
+}));
 
 function RegisterLoginModal() {
   const [open, setOpen] = useState(false);

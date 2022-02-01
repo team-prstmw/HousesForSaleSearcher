@@ -36,7 +36,7 @@ function ListOfHouses() {
         <Chip
           icon={<DoneIcon />}
           sx={{ display: value !== null ? '' : 'none' }}
-          label={`${value !== null ? `${value}` : ''}`}
+          label={`${value !== null ? value : ''}`}
           onDelete={handleDelete}
         />
       </Box>

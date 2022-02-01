@@ -1,6 +1,3 @@
-/* eslint-disable import/no-absolute-path */
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { useState } from 'react';
@@ -37,7 +34,7 @@ function HomePage() {
         </Grid>
       </Box>
       <Grid item xs={12} marginTop="28px" sx={{ flexBasis: { xs: '0' } }}>
-        <ChangeView isToggle={toggleView} isSetToggle={setToggleView} />
+        <ChangeView toggleView={toggleView} setToggleView={setToggleView} />
         <Footer />
       </Grid>
     </Grid>

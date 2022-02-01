@@ -1,6 +1,3 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-absolute-path */
-/* eslint-disable import/no-unresolved */
 import Box from '@mui/material/Box';
 
 import Logo from '/src/assets/images/NavLogo.png';

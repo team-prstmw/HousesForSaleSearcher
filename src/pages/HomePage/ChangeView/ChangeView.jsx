@@ -1,16 +1,11 @@
-/* eslint-disable import/no-absolute-path */
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import MapIcon from '@mui/icons-material/Map';
 import SearchIcon from '@mui/icons-material/Search';
 import { Box, Button, ButtonGroup } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import theme from '/src/theme/theme';
-
 import styles from './ChangeView.module.scss';
 
-const ChangerButton = styled(Button)({
+const ChangerButton = styled(Button)(({ theme }) => ({
   flexDirection: 'column',
   width: '83px',
   height: '56px',
@@ -23,18 +18,16 @@ const ChangerButton = styled(Button)({
   '&:focus': {
     backgroundColor: 'none',
   },
-});
+}));
 
-function ChangeView(props) {
-  const state = { ...props };
-
+function ChangeView({ toggleView, setToggleView }) {
   return (
     <Box component="div" className={styles.buttonContainer}>
       <ButtonGroup variant="contained">
         <ChangerButton
           onClick={() => {
-            if (!state.isToggle) {
-              state.isSetToggle(true);
+            if (!toggleView) {
+              setToggleView(true);
             }
           }}
         >
@@ -43,8 +36,8 @@ function ChangeView(props) {
         </ChangerButton>
         <ChangerButton
           onClick={() => {
-            if (state.isToggle) {
-              state.isSetToggle(false);
+            if (toggleView) {
+              setToggleView(false);
             }
           }}
         >
