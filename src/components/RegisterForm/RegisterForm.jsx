@@ -20,7 +20,7 @@ import { registerSchema } from '/src/schemas/authSchemas';
 import { SIGN_UP_URL } from '/src/URLs';
 import { signInSignUp } from '/src/utils/auth';
 
-function RegisterForm({ fn }) {
+function RegisterForm({ changeStateFn }) {
   const [values, setValues] = useState({
     password: '',
     email: '',
@@ -48,7 +48,7 @@ function RegisterForm({ fn }) {
   };
 
   const onSubmit = ({ email, password }) => {
-    signInSignUp(email, password, SIGN_UP_URL, fn);
+    signInSignUp(email, password, SIGN_UP_URL, changeStateFn);
   };
 
   return (
@@ -119,7 +119,7 @@ function RegisterForm({ fn }) {
 }
 
 RegisterForm.propTypes = {
-  fn: PropTypes.func.isRequired,
+  changeStateFn: PropTypes.func.isRequired,
 };
 
 export default RegisterForm;

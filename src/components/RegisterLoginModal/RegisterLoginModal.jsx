@@ -27,6 +27,7 @@ function RegisterLoginModal() {
   };
 
   const handleChange = (event) => {
+    setState('');
     setChecked(event.target.checked);
   };
   return (
@@ -47,16 +48,12 @@ function RegisterLoginModal() {
           <IconButton aria-label="Close" className={styles.closeButton} onClick={handleClose}>
             <CloseIcon />
           </IconButton>
-          <RegisterLoginHeader checked={checked} onChange={handleChange} onClick={handleClose} />
-          {checked ? <RegisterForm fn={changeState} /> : <LoginForm fn={changeState} />}
+          <RegisterLoginHeader checked={checked} onChange={handleChange} onClick={handleClose} state={state} />
+          {checked ? <RegisterForm changeStateFn={changeState} /> : <LoginForm changeStateFn={changeState} />}
           {state === 'Success' ? (
-            <ActionAlert severity="success" fn={setState}>
-              {state}
-            </ActionAlert>
+            <ActionAlert severity="success" onCloseFn={setState} children={state} />
           ) : state ? (
-            <ActionAlert severity="error" fn={setState}>
-              {state}
-            </ActionAlert>
+            <ActionAlert severity="error" onCloseFn={setState} children={state} />
           ) : null}
         </Box>
       </Modal>

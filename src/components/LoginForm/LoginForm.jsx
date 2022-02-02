@@ -20,7 +20,7 @@ import { loginSchema } from '/src/schemas/authSchemas';
 import { RESET_PASSWORD, SIGN_IN_URL } from '/src/URLs';
 import { resetPassword, signInSignUp } from '/src/utils/auth';
 
-function LoginForm({ fn }) {
+function LoginForm({ changeStateFn }) {
   const [values, setValues] = React.useState({
     password: '',
     showPassword: false,
@@ -48,11 +48,11 @@ function LoginForm({ fn }) {
   };
 
   const onSubmit = ({ email, password }) => {
-    signInSignUp(email, password, SIGN_IN_URL, fn);
+    signInSignUp(email, password, SIGN_IN_URL, changeStateFn);
   };
 
   const onReset = () => {
-    resetPassword(getValues('email'), RESET_PASSWORD, fn);
+    resetPassword(getValues('email'), RESET_PASSWORD, changeStateFn);
   };
   return (
     <>
@@ -127,7 +127,7 @@ function LoginForm({ fn }) {
 }
 
 LoginForm.propTypes = {
-  fn: PropTypes.func.isRequired,
+  changeStateFn: PropTypes.func.isRequired,
 };
 
 export default LoginForm;
