@@ -1,18 +1,16 @@
 import './App.css';
-import React from 'react';
-
-import RegisterLoginModal from '/src/components/RegisterLoginModal/RegisterLoginModal';
 
 import { ThemeProvider } from '@mui/material/styles';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { useState, useCallback, useEffect } from 'react';
-// import { readAll, create } from '@/components/utils/api';
-import { readAll } from './utils/api';
+
+import RegisterLoginModal from '/src/components/RegisterLoginModal/RegisterLoginModal';
+import SellHousePage from '/src/pages/SellHousePage/SellHousePage';
+import theme from '/src/theme/theme';
 
 import AddHouseForm from './components/AddHouseForm/AddHouseForm';
-
-import theme from '/src/theme/theme';
-import SellHousePage from '/src/pages/SellHousePage/SellHousePage';
+// import { readAll, create } from '@/components/utils/api';
+import { readAll } from './utils/api';
 
 function App() {
   const [houses, setHouses] = useState(null);
