@@ -7,12 +7,13 @@ import { useEffect, useState } from 'react';
 
 import styles from './ListOfHouses.module.scss';
 
-const options = ['Cena rosnąco', 'Cena malejąco', 'Alfabetycznie'];
+const options = ['Cena rosnąco', 'Cena malejąco', 'A-Z', 'Z-A'];
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function ListOfHouses() {
   const [value, setValue] = useState(null);
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
+  const [sort, setSort] = useState([]);
 
   const getData = () => {
     fetch('/houses-for-sale.json')
@@ -22,17 +23,45 @@ function ListOfHouses() {
       .then((myJson) => {
         const obj = myJson.houses;
         const arr = Object.entries(obj);
-        setData(arr);
+        setSort(arr);
       });
+  };
+
+  const handleDelete = () => {
+    setValue(null);
   };
 
   useEffect(() => {
     getData();
   }, []);
 
-  const handleDelete = () => {
-    setValue(null);
-  };
+  useEffect(() => {
+    if (value === 'Cena rosnąco') {
+      const itemArray = sort.map((item) => item[1]);
+      const sorted = [...itemArray].sort((a, b) => a.price - b.price);
+      setData(sorted);
+    }
+    if (value === 'Cena malejąco') {
+      const itemArray = sort.map((item) => item[1]);
+      const sorted = [...itemArray].sort((a, b) => b.price - a.price);
+      setData(sorted);
+    }
+    if (value === 'A-Z') {
+      const itemArray = sort.map((item) => item[1]);
+      const sorted = [...itemArray].sort((a, b) => a.city.localeCompare(b.city));
+      setData(sorted);
+    }
+    if (value === 'Z-A') {
+      const itemArray = sort.map((item) => item[1]);
+      const sorted = [...itemArray].sort((a, b) => b.city.localeCompare(a.city));
+      setData(sorted);
+    }
+    if (value === null) {
+      const itemArray = [...sort].map((item) => item[1]);
+      setData(itemArray);
+    }
+    // Za pierwszym ładowaniem strony są dwa renderowania. Nie do końca wiem czy można to zrobić tak aby było jedno renderowanie. Obstawiam że tak ale nie umiem. Ogólnie pierwsze renderowanie jest jak są puste tablice czyli stan z useState a kolejny render jest już z ustawionymi tablicami.
+  }, [sort, value]);
 
   return (
     <Box component="div" className={styles.housesComponent}>
@@ -57,18 +86,18 @@ function ListOfHouses() {
           onDelete={handleDelete}
         />
       </Box>
-
       <Box component="div" className={styles.housesList}>
-        {data.map((item) => (
-          <Box component="div" className={styles.houseElement}>
+        {data.map((item, i) => (
+          <Box component="div" className={styles.houseElement} key={sort[i][0].toString()}>
+            {/* Przez to że jest tyle renderowań nie moge sobie poradzić z ustawieniem Key. bo dając w mapie drugi arkument jaki np id jest ono array. Jakoś tak wykombinowałem ale nie wiem czy by tak mogło zostac */}
             <h4>
-              {item[1].city}, {item[1].streetName} {item[1].streetNumber}
+              {item.city}, {item.streetName} {item.streetNumber}
             </h4>
             <p className={styles.price}>
-              {item[1].price}zł/m<sup>2</sup>
+              {item.price}zł/m<sup>2</sup>
             </p>
             <img src="\src\assets\images\House.png" alt="House" />
-            <p className={styles.shortInfo}>{item[1].descriptionField}</p>
+            <p className={styles.shortInfo}>{item.descriptionField}</p>
             <Button className={styles.moreInfo}>more info</Button>
             <Checkbox
               color="warning"
