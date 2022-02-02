@@ -19,6 +19,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
+import getRandomString from '/src/utils/getRandomString';
+
 import storage from '../../firebase/firebase';
 import { create } from '../../utils/api/create';
 import styles from './AddHouseForm.module.css';
@@ -72,61 +74,9 @@ const schema = yup.object({
   descriptionField: yup.string().required('This field is required.'),
 });
 
-const getProperty = function (object, propertyName, photoUrl) {
-  return (object[propertyName] = photoUrl);
-};
-
 const AddHouseForm = () => {
   const [moreFacilitiesShown, setMoreFacilitiesShown] = useState(false);
   const [images, setImages] = useState();
-
-  function getRandomString(length) {
-    const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < length; i += 1) {
-      result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
-    }
-    return result;
-  }
-
-  const sendPhotos = (images, housesData) => {
-    const photos = {};
-    images.forEach((element, index) => {
-      const file = element;
-      const metadata = { contentType: 'image/jpeg' };
-      const storageRef = ref(storage, `images/${getRandomString(9)}`);
-      const uploadTask = uploadBytesResumable(storageRef, file, metadata);
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
-        },
-        (error) => {
-          switch (error.code) {
-            case 'storage/unauthorized':
-              console.log("User doesn't have permission to access the object");
-              break;
-            case 'storage/canceled':
-              console.log('User canceled the upload');
-              break;
-            default:
-              console.log('Unknown error occurred');
-              break;
-          }
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            getProperty(photos, `photo ${index}`, downloadURL);
-            console.log(photos);
-            console.log(housesData);
-            const uploadedData = Object.assign(housesData, photos);
-            create('houses', uploadedData);
-          });
-        }
-      );
-    });
-  };
 
   const {
     register,
@@ -136,6 +86,29 @@ const AddHouseForm = () => {
     mode: 'onBlur',
     resolver: yupResolver(schema),
   });
+
+  const addIndexToObjectKey = (propertyName) => {
+    return `photo ${propertyName}`;
+  };
+
+  const sendPhotos = (imagesToUpload, housesData) => {
+    let photos = {};
+    imagesToUpload.forEach((element, index) => {
+      const file = element;
+      const metadata = { contentType: 'image/jpeg' };
+      const storageRef = ref(storage, `images/${getRandomString(9)}`);
+      const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+      uploadTask.on('state_changed', null, null, () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          photos = { [addIndexToObjectKey(index)]: downloadURL };
+          const uploadedData = Object.assign(housesData, photos);
+          if (index === imagesToUpload.length - 1) {
+            create('houses', uploadedData);
+          }
+        });
+      });
+    });
+  };
 
   const addImages = (rawImages) => {
     setImages(Array.from(rawImages));
