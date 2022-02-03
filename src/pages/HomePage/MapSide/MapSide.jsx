@@ -1,6 +1,7 @@
 import { LocationOn } from '@material-ui/icons';
 import { Box, Button, styled, TextField, Typography } from '@mui/material';
 
+import GoogleMapComp from '../../../components/mapComp/GoogleMapComp';
 import styles from './MapSide.module.scss';
 
 const ButtonSearch = styled(Button)(({ theme }) => ({
@@ -42,14 +43,15 @@ function MapHouses() {
           <Typography className={styles.searchBy}>SEARCH BY</Typography>
         </ButtonSearch>
       </Box>
-      <Box
+      <GoogleMapComp />
+      {/* <Box
         component="img"
         sx={{
           width: { xs: '90%', md: '90%', xl: '803px' },
           height: { xl: '626px' },
         }}
         src="\src\assets\images\Map.png"
-      />
+      /> */}
     </Box>
   );
 }

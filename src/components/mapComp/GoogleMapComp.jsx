@@ -1,6 +1,6 @@
 import { GoogleMap, Marker, withGoogleMap, withScriptjs } from 'react-google-maps';
 
-import API_KEY from './mapComp/googleMapsApiKey';
+import API_KEY from './googleMapsApiKey';
 
 // values for testing
 const housesCoords = {
@@ -29,7 +29,7 @@ function Map() {
 
 const WrappedMap = withScriptjs(withGoogleMap(Map));
 
-export default function MapComp() {
+export default function GoogleMapComp() {
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
       <WrappedMap

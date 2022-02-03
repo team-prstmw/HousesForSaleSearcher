@@ -1,10 +1,9 @@
 import { ThemeProvider } from '@mui/material/styles';
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MapComp from './components/MapComp';
 
 import RegisterLoginModal from '/src/components/RegisterLoginModal/RegisterLoginModal';
 
+import GoogleMapComp from './components/mapComp/GoogleMapComp';
 import HomePage from './pages/HomePage/HomePage';
 import SellHousePage from './pages/SellHousePage/SellHousePage';
 import theme from './theme/theme';
@@ -20,7 +19,7 @@ function App() {
             <Route path="/user" element={<h1>USER PAGE</h1>} />
             <Route path="/favorites" element={<h1>FAVORITES</h1>} />
             <Route path="/sell-house" element={<SellHousePage />} />
-            <Route path="/map" element={<MapComp/>} />
+            <Route path="/map" element={<GoogleMapComp />} />
           </Routes>
         </ThemeProvider>
       </div>
