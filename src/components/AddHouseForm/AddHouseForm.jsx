@@ -88,7 +88,7 @@ const AddHouseForm = () => {
   });
 
   const addIndexToObjectKey = (propertyName) => {
-    return `photo ${propertyName}`;
+    return `photo_${propertyName}`;
   };
 
   const sendPhotos = (imagesToUpload, housesData) => {
