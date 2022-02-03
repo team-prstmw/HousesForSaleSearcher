@@ -1,6 +1,7 @@
 import { GoogleMap, Marker, withGoogleMap, withScriptjs } from 'react-google-maps';
 
-import API_KEY from './googleMapsApiKey';
+const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
+// import API_KEY from './googleMapsApiKey';
 
 // values for testing
 const housesCoords = {
