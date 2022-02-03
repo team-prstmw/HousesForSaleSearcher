@@ -96,7 +96,7 @@ function ListOfHouses() {
             <p className={styles.price}>
               {item.price}zł/m<sup>2</sup>
             </p>
-            <img src="\src\assets\images\House.png" alt="House" />
+            <img src={item.photo_0} alt="House" />
             <p className={styles.shortInfo}>{item.descriptionField}</p>
             <Button className={styles.moreInfo}>more info</Button>
             <Checkbox
