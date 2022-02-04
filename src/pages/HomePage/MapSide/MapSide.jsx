@@ -43,15 +43,12 @@ function MapHouses() {
           <Typography className={styles.searchBy}>SEARCH BY</Typography>
         </ButtonSearch>
       </Box>
-      <GoogleMapComp />
-      {/* <Box
-        component="img"
+      <GoogleMapComp
         sx={{
           width: { xs: '90%', md: '90%', xl: '803px' },
           height: { xl: '626px' },
         }}
-        src="\src\assets\images\Map.png"
-      /> */}
+      />
     </Box>
   );
 }
