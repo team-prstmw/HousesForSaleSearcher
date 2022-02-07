@@ -1,10 +1,10 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import LoginProvider from './contexts/LoginProvider';
 import HomePage from './pages/HomePage/HomePage';
 import SellHousePage from './pages/SellHousePage/SellHousePage';
 import theme from './theme/theme';
-import LoginProvider from './utils/auth/LoginProvider';
 
 function App() {
   return (
