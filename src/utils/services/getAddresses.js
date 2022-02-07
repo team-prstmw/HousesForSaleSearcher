@@ -1,7 +1,7 @@
 import makeRequest from './makeRequest';
 
-export default function getAddresses() {
-  return makeRequest('https://houses-for-sale-sandbox-default-rtdb.europe-west1.firebasedatabase.app/.json')
+export default function getAddresses(source) {
+  return makeRequest(source)
     .then((res) => res.json())
     .then((res) => {
       const addressesList = [];

@@ -9,6 +9,8 @@ import ChangeView from './ChangeView/ChangeView';
 import ListOfHouses from './ListOfHouses/ListOfHouses';
 import MapHouses from './MapSide/MapSide';
 
+const MAP_INIT = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAvhqVzcgHYFnQjvxlzB8aXWO9iy_dR4jM&callback=initMap';
+
 function HomePage() {
   const [toggleView, setToggleView] = useState(true);
 
@@ -37,6 +39,7 @@ function HomePage() {
         <ChangeView toggleView={toggleView} setToggleView={setToggleView} />
         <Footer />
       </Grid>
+      <script async defer src={MAP_INIT} />
     </Grid>
   );
 }
