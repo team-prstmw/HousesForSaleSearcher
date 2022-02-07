@@ -20,7 +20,10 @@ function RegisterLoginModal() {
   const [state, setState] = useState('');
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setState('');
+    setOpen(false);
+  };
 
   const changeState = (stateToChange) => {
     setState(mapError(stateToChange));
@@ -51,9 +54,9 @@ function RegisterLoginModal() {
           <RegisterLoginHeader checked={checked} onChange={handleChange} onClick={handleClose} state={state} />
           {checked ? <RegisterForm changeStateFn={changeState} /> : <LoginForm changeStateFn={changeState} />}
           {state === 'Success' ? (
-            <ActionAlert severity="success" onCloseFn={setState} children={state} />
+            <ActionAlert severity="success" onCloseAlertInfo={setState} children={state} />
           ) : state ? (
-            <ActionAlert severity="error" onCloseFn={setState} children={state} />
+            <ActionAlert severity="error" onCloseAlertInfo={setState} children={state} />
           ) : null}
         </Box>
       </Modal>

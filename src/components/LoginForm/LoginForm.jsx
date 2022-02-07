@@ -67,6 +67,7 @@ function LoginForm({ changeStateFn }) {
           flexWrap: 'nowrap',
           alignContent: 'center',
         }}
+        noValidate
       >
         <Stack spacing={4} className={styles.stack__wrapper}>
           <TextField

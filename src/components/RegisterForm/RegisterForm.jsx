@@ -52,7 +52,7 @@ function RegisterForm({ changeStateFn }) {
   };
 
   return (
-    <Box className={styles.registerForm__wrapper} component="form" onSubmit={handleSubmit(onSubmit)}>
+    <Box className={styles.registerForm__wrapper} component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
       <Stack spacing={4} className={styles.stack__wrapper}>
         <TextField
           id="outlined-textarea-name"
