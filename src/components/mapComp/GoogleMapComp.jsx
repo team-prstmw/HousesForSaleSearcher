@@ -5,15 +5,8 @@ import { GoogleMap, Marker, withGoogleMap, withScriptjs } from 'react-google-map
 import getAddresses from '../../utils/services/getAddresses';
 import getCoordsFromAddress from '../../utils/services/getCoordsFromAddress';
 
-// const geocodingUrl = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}`;
-
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 const HFSS_API = 'https://houses-for-sale-sandbox-default-rtdb.europe-west1.firebasedatabase.app/.json';
-
-// const getA = async () => {
-//   console.log(await getCoordsFromAddress());
-// };
-// getA();
 
 // const housesCoords = {
 //   house1: { lat: 54.415924, lng: 18.566982, avalible: true, id: 1 },
@@ -59,15 +52,3 @@ export default function GoogleMapComp() {
     </div>
   );
 }
-
-// {Object.values(housesCoords)
-//   .filter((house) => house.avalible)
-//   .map((house) => (
-//     <Marker
-//       key={house.id}
-//       position={{
-//         lat: house.lat,
-//         lng: house.lng,
-//       }}
-//     />
-//   ))}
