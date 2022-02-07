@@ -15,13 +15,17 @@ Aplikację wykonali uczestnicy kursu przy pomocy mentora.
 
 ## II. [DEMO]()
 
-## III. Wykorzystane technologie:
+## III. Opis projektu:
+Współlokator ciągle zajmuje łazienkę? Puszcza muzykę kiedy Ty próbujesz programować? W lodówce masz jedną półkę, a w pralce ciągle są czyjeś ubrania?
+Koniec z wynajmowaniem! Znajdź dom o jakim zawsze marzyłeś w przystępnej cenie!
+
+## IV. Wykorzystane technologie:
 - React
 - JavaScript
 - HTML
-- CSS - SCSS
+- CSS - SCSS + Material UI
 
-## IV. Narzędzia z jakimi pracowaliśmy:
+## V. Narzędzia z jakimi pracowaliśmy:
 - Firebase
 - Jira
 - Figma
@@ -30,14 +34,14 @@ Aplikację wykonali uczestnicy kursu przy pomocy mentora.
 
 ### [Design](https://www.figma.com/file/ZkiIq0vudllZEto6pU2UQh/Untitled?node-id=5%3A25)
 
-## V. Organizacja pracy
+## VI. Organizacja pracy
 
 Organizacja pracy zespołu oraz code review były przeprowadzane w serwisie GitHub.
 Zadania opisano oraz rozdzielano w oprogramowaniu Jira.
 Do daily korzystaliśmy z Google Meet. Daily były przeprowadzane w każdy wtorek, czwartek oraz niedzielę.
 Podczas codziennej komunikacji korzystano z Discorda.
 
-## VI. Uruchomienie projektu
+## VII. Uruchomienie projektu
 Do uruchomienia projektu na maszynie lokalnej należy wpisać w terminalu:
 ```bash
 git clone git@github.com:team-prstmw/HousesForSaleSearcher.git
@@ -48,6 +52,6 @@ yarn install
 ```
 Następnie:
 ```bash
-npm run dev
+yarn run dev
 ```
 Aplikacja będzie dostępna pod adresem `localhost:3000`
