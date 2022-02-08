@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { yupResolver } from '@hookform/resolvers/yup';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -25,52 +24,37 @@ import getRandomString from '/src/utils/getRandomString';
 import styles from './AddHouseForm.module.css';
 import FacilityCheckbox from './components/FacilityCheckbox/FacilityCheckbox';
 
+const REQUIRED_ERROR = 'This field is required.';
+const SPECIAL_CHARACTERS_ERROR = 'No special characters allowed.';
+const NUMBER_NEEDED_ERROR = 'This field must be a number.';
+const POSITIVE_NUMBER_ERROR = 'Must be a positive number.';
+const NEGATIVE_NUMBER_ERROR = 'Cannot be a negative number.';
+
 const schema = yup.object({
   streetNumber: yup
     .string()
-    .required('This field is required.')
-    .matches(/^[A-Za-z0-9 ]+$/, 'No special characters allowed.'),
-  streetName: yup.string().required('This field is required.'),
-  streetSuffix: yup.string().required('This field is required.'),
+    .required(REQUIRED_ERROR)
+    .matches(/^[A-Za-z0-9 ]+$/, SPECIAL_CHARACTERS_ERROR),
+  streetName: yup.string().required(REQUIRED_ERROR),
+  streetSuffix: yup.string().required(REQUIRED_ERROR),
   city: yup
     .string()
-    .required('This field is required.')
-    .matches(/^[A-Za-z0-9 ]+$/, 'No special characters allowed.'),
+    .required(REQUIRED_ERROR)
+    .matches(/^[A-Za-z0-9 ]+$/, SPECIAL_CHARACTERS_ERROR),
   state: yup
     .string()
-    .required('This field is required.')
-    .matches(/^[A-Za-z0-9 ]+$/, 'No special characters allowed.'),
-  price: yup
-    .number('This field must be a number.')
-    .positive('Must be a positive number.')
-    .required('This field is required.'),
-  propertyType: yup.string().required('This field is required.'),
-  yearBuilt: yup
-    .number('This field must be a number.')
-    .positive('Must be a positive number.')
-    .required('This field is required.'),
-  dimension: yup
-    .number('This field must be a number.')
-    .positive('Must be a positive number.')
-    .required('This field is required.'),
-  floor: yup
-    .number('This field must be a number.')
-    .min(0, 'Cannot be a negative number.')
-    .required('This field is required.'),
-  floorsInBuilding: yup
-    .number('This field must be a number.')
-    .min(0, 'Cannot be a negative number.')
-    .required('This field is required.'),
-  roomsNumber: yup
-    .number('This field must be a number.')
-    .positive('Must be a positive number.')
-    .required('This field is required.'),
-  bathroomNumber: yup
-    .number('This field must be a number.')
-    .positive('Must be a positive number.')
-    .required('This field is required.'),
-  heating: yup.string().required('This field is required.'),
-  descriptionField: yup.string().required('This field is required.'),
+    .required(REQUIRED_ERROR)
+    .matches(/^[A-Za-z0-9 ]+$/, SPECIAL_CHARACTERS_ERROR),
+  price: yup.number(NUMBER_NEEDED_ERROR).positive(POSITIVE_NUMBER_ERROR).required(REQUIRED_ERROR),
+  propertyType: yup.string().required(REQUIRED_ERROR),
+  yearBuilt: yup.number(NUMBER_NEEDED_ERROR).positive(POSITIVE_NUMBER_ERROR).required(REQUIRED_ERROR),
+  dimension: yup.number(NUMBER_NEEDED_ERROR).positive(POSITIVE_NUMBER_ERROR).required(REQUIRED_ERROR),
+  floor: yup.number(NUMBER_NEEDED_ERROR).min(0, NEGATIVE_NUMBER_ERROR).required(REQUIRED_ERROR),
+  floorsInBuilding: yup.number(NUMBER_NEEDED_ERROR).min(0, NEGATIVE_NUMBER_ERROR).required(REQUIRED_ERROR),
+  roomsNumber: yup.number(NUMBER_NEEDED_ERROR).positive(POSITIVE_NUMBER_ERROR).required(REQUIRED_ERROR),
+  bathroomNumber: yup.number(NUMBER_NEEDED_ERROR).positive(POSITIVE_NUMBER_ERROR).required(REQUIRED_ERROR),
+  heating: yup.string().required(REQUIRED_ERROR),
+  descriptionField: yup.string().required(REQUIRED_ERROR),
 });
 
 const AddHouseForm = () => {
@@ -145,7 +129,7 @@ const AddHouseForm = () => {
           id="street-number"
           {...register('streetNumber')}
           label="Street number"
-          error={errors?.streetNumber}
+          error={!!errors?.streetNumber}
           helperText={errors?.streetNumber && errors?.streetNumber.message}
           autoComplete="address-line1"
         />
@@ -154,7 +138,7 @@ const AddHouseForm = () => {
             id="street-name"
             {...register('streetName')}
             label="Street name"
-            error={errors?.streetName}
+            error={!!errors?.streetName}
             helperText={errors?.streetName && errors?.streetName.message}
             sx={{ width: '100%' }}
             autoComplete="address-line2"
@@ -183,7 +167,7 @@ const AddHouseForm = () => {
             id="city"
             {...register('city')}
             label="City"
-            error={errors?.city}
+            error={!!errors?.city}
             helperText={errors?.city && errors?.city.message}
             autoComplete="address-level12"
           />
@@ -191,7 +175,7 @@ const AddHouseForm = () => {
             id="state"
             {...register('state')}
             label="State"
-            error={errors?.state}
+            error={!!errors?.state}
             helperText={errors?.state && errors?.state.message}
             autoComplete="state"
           />
@@ -211,10 +195,10 @@ const AddHouseForm = () => {
             InputProps={{
               startAdornment: <InputAdornment position="start">$</InputAdornment>,
             }}
-            error={errors?.price}
+            error={!!errors?.price}
             helperText={errors?.price && errors?.price.message}
           />
-          <FormControl fullWidth error={errors?.propertyType}>
+          <FormControl fullWidth error={!!errors?.propertyType}>
             <InputLabel id="property-type">Type of property</InputLabel>
             <Select
               labelId="property-type"
@@ -222,7 +206,6 @@ const AddHouseForm = () => {
               label="Type of property"
               defaultValue=""
               {...register('propertyType')}
-              helperText={errors?.propertyType && errors?.propertyType.message}
             >
               <MenuItem value="apartment">Apartment</MenuItem>
               <MenuItem value="house">House</MenuItem>
@@ -241,7 +224,7 @@ const AddHouseForm = () => {
             defaultValue={2000}
             {...register('yearBuilt')}
             label="Year built"
-            error={errors?.yearBuilt}
+            error={!!errors?.yearBuilt}
             helperText={errors?.yearBuilt && errors?.yearBuilt.message}
           />
           <TextField
@@ -250,7 +233,7 @@ const AddHouseForm = () => {
             defaultValue={0}
             {...register('dimension')}
             label="Dimension (sqft)"
-            error={errors?.dimension}
+            error={!!errors?.dimension}
             helperText={errors?.dimension && errors?.dimension.message}
           />
         </span>
@@ -261,7 +244,7 @@ const AddHouseForm = () => {
             defaultValue={0}
             {...register('floor')}
             label="Floor"
-            error={errors?.floor}
+            error={!!errors?.floor}
             helperText={errors?.floor && errors?.floor.message}
           />
           <TextField
@@ -270,7 +253,7 @@ const AddHouseForm = () => {
             defaultValue={0}
             {...register('floorsInBuilding')}
             label="Floors in building"
-            error={errors?.floorsInBuilding}
+            error={!!errors?.floorsInBuilding}
             helperText={errors?.floorsInBuilding && errors?.floorsInBuilding.message}
           />
         </span>
@@ -281,7 +264,7 @@ const AddHouseForm = () => {
             defaultValue={0}
             {...register('roomsNumber')}
             label="Number of rooms"
-            error={errors?.roomsNumber}
+            error={!!errors?.roomsNumber}
             helperText={errors?.roomsNumber && errors?.roomsNumber.message}
           />
           <TextField
@@ -290,20 +273,13 @@ const AddHouseForm = () => {
             defaultValue={0}
             {...register('bathroomNumber')}
             label="Number of bathrooms"
-            error={errors?.bathroomNumber}
+            error={!!errors?.bathroomNumber}
             helperText={errors?.bathroomNumber && errors?.bathroomNumber.message}
           />
         </span>
-        <FormControl fullWidth error={errors?.heating}>
+        <FormControl fullWidth error={!!errors?.heating}>
           <InputLabel id="heating">Heating</InputLabel>
-          <Select
-            labelId="heating"
-            id="heating"
-            label="Heating"
-            defaultValue=""
-            {...register('heating')}
-            helperText={errors?.heating && errors?.heating.message}
-          >
+          <Select labelId="heating" id="heating" label="Heating" defaultValue="" {...register('heating')}>
             <MenuItem value="forced-air">Forced Air</MenuItem>
             <MenuItem value="radiators">Radiators</MenuItem>
             <MenuItem value="heat-pump">Heat Pump</MenuItem>
@@ -338,7 +314,7 @@ const AddHouseForm = () => {
         multiline
         rows={8}
         {...register('descriptionField')}
-        error={errors?.descriptionField}
+        error={!!errors?.descriptionField}
         helperText={errors?.descriptionField && errors?.descriptionField.message}
       />
       <label htmlFor="images-upload">
