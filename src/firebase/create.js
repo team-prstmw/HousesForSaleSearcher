@@ -1,4 +1,4 @@
-import { makeApiUrl } from './makeApiUrl';
+import { makeApiUrl } from './utils/makeApiUrl';
 
 export const create = (key, dataToSave) => {
   const apiUrl = makeApiUrl(key);

@@ -1,4 +1,4 @@
-import { create } from './api';
+import { create } from '/src/firebase';
 
 export const addHouseToDB = (props) => {
   const {
@@ -19,7 +19,6 @@ export const addHouseToDB = (props) => {
     yearBuilt,
     images,
     moreFacilities,
-    ...otherProps
   } = props.fields;
 
   const newHouseData = {

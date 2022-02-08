@@ -22,7 +22,13 @@
     "import/order": 0,
     "simple-import-sort/imports": 2,
     "simple-import-sort/exports": 2,
-    "no-unused-vars": [2, { "argsIgnorePattern": "^_" }]
+    "no-unused-vars": [2, { "argsIgnorePattern": "^_" }],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   },
   "overrides": [
     {

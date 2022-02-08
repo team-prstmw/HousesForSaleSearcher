@@ -1,5 +1,5 @@
-import { makeApiUrl } from './makeApiUrl';
-import { objectToArray } from './objectToArray';
+import { makeApiUrl } from './utils/makeApiUrl';
+import { objectToArray } from './utils/objectToArray';
 
 export const readAll = (key) => {
   const apiUrl = makeApiUrl(key);

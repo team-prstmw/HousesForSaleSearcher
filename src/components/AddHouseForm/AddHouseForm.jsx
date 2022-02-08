@@ -19,10 +19,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
+import { create, storage } from '/src/firebase';
 import getRandomString from '/src/utils/getRandomString';
 
-import storage from '../../firebase/firebase';
-import { create } from '../../utils/api/create';
 import styles from './AddHouseForm.module.css';
 import FacilityCheckbox from './components/FacilityCheckbox/FacilityCheckbox';
 
@@ -91,7 +90,7 @@ const AddHouseForm = () => {
     return `photo_${propertyName}`;
   };
 
-  const sendPhotos = (imagesToUpload, housesData) => {
+  const sendHouseDataWithPhotos = (imagesToUpload, housesData) => {
     let photos = {};
     imagesToUpload.forEach((element, index) => {
       const file = element;
@@ -117,7 +116,7 @@ const AddHouseForm = () => {
   const removeImage = (name) => setImages((prevState) => prevState?.filter((img) => img.name !== name));
 
   const handleSend = (fields) => {
-    sendPhotos(images, fields);
+    sendHouseDataWithPhotos(images, fields);
   };
 
   const facilities = [
