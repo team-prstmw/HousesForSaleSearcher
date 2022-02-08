@@ -1,27 +1,23 @@
-import { useForm, Controller } from 'react-hook-form';
-import { useState } from 'react';
-
-import Box from '@mui/system/Box';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
-import FormHelperText from '@mui/material/FormHelperText';
-import { signInSignUp } from '/src/utils/auth';
-import { SIGN_UP_URL } from '/src/URLs';
-
+import { yupResolver } from '@hookform/resolvers/yup';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
-import { yupResolver } from '@hookform/resolvers/yup';
-
-import { registerSchema } from '/src/schemas/authSchemas';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/system/Box';
+import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 
 import styles from '/src/components/RegisterForm/RegisterForm.module.css';
+import { registerSchema } from '/src/schemas/authSchemas';
+import { SIGN_UP_URL } from '/src/URLs';
+import { signInSignUp } from '/src/utils/auth';
 
 function RegisterForm(props) {
   const { fn, ...otherProps } = props;
