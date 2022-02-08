@@ -1,9 +1,12 @@
+/* eslint-disable import/no-absolute-path */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
 import DoneIcon from '@mui/icons-material/Done';
 import { Autocomplete, Box, Button, Checkbox, TextField } from '@mui/material';
 import Chip from '@mui/material/Chip';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import noPhoto from '/src/assets/images/nophoto.png';
 
@@ -12,33 +15,22 @@ import styles from './ListOfHouses.module.scss';
 const options = ['Payment (Low to High)', 'Payment (High to Low)', 'A-Z', 'Z-A'];
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-function ListOfHouses() {
+function ListOfHouses({ houses }) {
   const [sortType, setSortType] = useState(null);
-  const [houseList, setHouseList] = useState([]);
   const [sortedHouses, setSortedHouses] = useState([]);
-
-  const getData = () => {
-    fetch('/houses-for-sale.json')
-      .then((response) => {
-        return response.json();
-      })
-      .then((myJson) => {
-        const obj = myJson.houses;
-        const arr = Object.entries(obj);
-        setHouseList(arr);
-      });
-  };
+  const houseList = useRef([]);
 
   const handleDelete = () => {
     setSortType(null);
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    houseList.current = houses;
+    setSortedHouses(houseList.current);
+  }, [houses]);
 
   useEffect(() => {
-    const itemArray = houseList.map((item) => item[1]);
+    const itemArray = houseList.current.map((item) => item);
     if (sortType === 'Payment (Low to High)') {
       const sorted = [...itemArray].sort((a, b) => a.price - b.price);
       setSortedHouses(sorted);
@@ -56,7 +48,7 @@ function ListOfHouses() {
       setSortedHouses(sorted);
     }
     if (sortType === null) {
-      setSortedHouses([...houseList].map((item) => item[1]));
+      setSortedHouses(itemArray);
     }
   }, [houseList, sortType]);
 

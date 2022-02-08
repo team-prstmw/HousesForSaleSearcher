@@ -1,3 +1,7 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable import/no-absolute-path */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { useState } from 'react';
@@ -9,9 +13,8 @@ import ChangeView from './ChangeView/ChangeView';
 import ListOfHouses from './ListOfHouses/ListOfHouses';
 import MapHouses from './MapSide/MapSide';
 
-function HomePage() {
+function HomePage({ houses }) {
   const [toggleView, setToggleView] = useState(true);
-
   return (
     <Grid sx={{ display: 'flex', flexDirection: 'column' }} height="100vh">
       <Grid item xs={12} marginBottom="38px" sx={{ flexBasis: { xs: '0' } }}>
@@ -30,7 +33,7 @@ function HomePage() {
           <MapHouses />
         </Grid>
         <Grid item xs={12} md={6} sx={{ display: { xs: toggleView ? 'none' : 'block', md: 'block' } }}>
-          <ListOfHouses />
+          <ListOfHouses houses={houses} />
         </Grid>
       </Box>
       <Grid item xs={12} marginTop="28px" sx={{ flexBasis: { xs: '0' } }}>
