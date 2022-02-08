@@ -5,15 +5,17 @@ import { Autocomplete, Box, Button, Checkbox, TextField } from '@mui/material';
 import Chip from '@mui/material/Chip';
 import { useEffect, useState } from 'react';
 
+import noPhoto from '/src/assets/images/nophoto.png';
+
 import styles from './ListOfHouses.module.scss';
 
-const options = ['Cena rosnąco', 'Cena malejąco', 'A-Z', 'Z-A'];
+const options = ['Payment (Low to High)', 'Payment (High to Low)', 'A-Z', 'Z-A'];
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function ListOfHouses() {
-  const [value, setValue] = useState(null);
-  const [data, setData] = useState([]);
-  const [sort, setSort] = useState([]);
+  const [sortType, setSortType] = useState(null);
+  const [houseList, setHouseList] = useState([]);
+  const [sortedHouses, setSortedHouses] = useState([]);
 
   const getData = () => {
     fetch('/houses-for-sale.json')
@@ -23,12 +25,12 @@ function ListOfHouses() {
       .then((myJson) => {
         const obj = myJson.houses;
         const arr = Object.entries(obj);
-        setSort(arr);
+        setHouseList(arr);
       });
   };
 
   const handleDelete = () => {
-    setValue(null);
+    setSortType(null);
   };
 
   useEffect(() => {
@@ -36,32 +38,27 @@ function ListOfHouses() {
   }, []);
 
   useEffect(() => {
-    if (value === 'Cena rosnąco') {
-      const itemArray = sort.map((item) => item[1]);
+    const itemArray = houseList.map((item) => item[1]);
+    if (sortType === 'Payment (Low to High)') {
       const sorted = [...itemArray].sort((a, b) => a.price - b.price);
-      setData(sorted);
+      setSortedHouses(sorted);
     }
-    if (value === 'Cena malejąco') {
-      const itemArray = sort.map((item) => item[1]);
+    if (sortType === 'Payment (High to Low)') {
       const sorted = [...itemArray].sort((a, b) => b.price - a.price);
-      setData(sorted);
+      setSortedHouses(sorted);
     }
-    if (value === 'A-Z') {
-      const itemArray = sort.map((item) => item[1]);
+    if (sortType === 'A-Z') {
       const sorted = [...itemArray].sort((a, b) => a.city.localeCompare(b.city));
-      setData(sorted);
+      setSortedHouses(sorted);
     }
-    if (value === 'Z-A') {
-      const itemArray = sort.map((item) => item[1]);
+    if (sortType === 'Z-A') {
       const sorted = [...itemArray].sort((a, b) => b.city.localeCompare(a.city));
-      setData(sorted);
+      setSortedHouses(sorted);
     }
-    if (value === null) {
-      const itemArray = [...sort].map((item) => item[1]);
-      setData(itemArray);
+    if (sortType === null) {
+      setSortedHouses([...houseList].map((item) => item[1]));
     }
-    // Za pierwszym ładowaniem strony są dwa renderowania. Nie do końca wiem czy można to zrobić tak aby było jedno renderowanie. Obstawiam że tak ale nie umiem. Ogólnie pierwsze renderowanie jest jak są puste tablice czyli stan z useState a kolejny render jest już z ustawionymi tablicami.
-  }, [sort, value]);
+  }, [houseList, sortType]);
 
   return (
     <Box component="div" className={styles.housesComponent}>
@@ -71,9 +68,9 @@ function ListOfHouses() {
           <Autocomplete
             className={styles.options}
             disableClearable
-            value={value}
+            value={sortType}
             onChange={(event, newValue) => {
-              setValue(newValue);
+              setSortType(newValue);
             }}
             options={options}
             renderInput={(params) => <TextField {...params} />}
@@ -81,22 +78,21 @@ function ListOfHouses() {
         </div>
         <Chip
           icon={<DoneIcon />}
-          sx={{ display: value !== null ? '' : 'none' }}
-          label={`${value !== null ? value : ''}`}
+          sx={{ display: sortType !== null ? '' : 'none' }}
+          label={`${sortType !== null ? sortType : ''}`}
           onDelete={handleDelete}
         />
       </Box>
       <Box component="div" className={styles.housesList}>
-        {data.map((item, i) => (
-          <Box component="div" className={styles.houseElement} key={sort[i][0].toString()}>
-            {/* Przez to że jest tyle renderowań nie moge sobie poradzić z ustawieniem Key. bo dając w mapie drugi arkument jaki np id jest ono array. Jakoś tak wykombinowałem ale nie wiem czy by tak mogło zostac */}
+        {sortedHouses.map((item, i) => (
+          <Box component="div" className={styles.houseElement} key={i.toString()}>
             <h4>
               {item.city}, {item.streetName} {item.streetNumber}
             </h4>
             <p className={styles.price}>
               {item.price}zł/m<sup>2</sup>
             </p>
-            <img src={item.photo_0} alt="House" />
+            <img src={item.photo_0 ? item.photo_0 : noPhoto} alt="House" />
             <p className={styles.shortInfo}>{item.descriptionField}</p>
             <Button className={styles.moreInfo}>more info</Button>
             <Checkbox
