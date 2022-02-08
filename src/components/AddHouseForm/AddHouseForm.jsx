@@ -13,9 +13,13 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
+
+import { create, storage } from '/src/firebase';
+import getRandomString from '/src/utils/getRandomString';
 
 import styles from './AddHouseForm.module.css';
 import FacilityCheckbox from './components/FacilityCheckbox/FacilityCheckbox';
@@ -66,6 +70,29 @@ const AddHouseForm = () => {
     resolver: yupResolver(schema),
   });
 
+  const addIndexToObjectKey = (propertyName) => {
+    return `photo_${propertyName}`;
+  };
+
+  const sendHouseDataWithPhotos = (imagesToUpload, housesData) => {
+    let photos = {};
+    imagesToUpload.forEach((element, index) => {
+      const file = element;
+      const metadata = { contentType: 'image/jpeg' };
+      const storageRef = ref(storage, `images/${getRandomString(9)}`);
+      const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+      uploadTask.on('state_changed', null, null, () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          photos = { [addIndexToObjectKey(index)]: downloadURL };
+          const uploadedData = Object.assign(housesData, photos);
+          if (index === imagesToUpload.length - 1) {
+            create('houses', uploadedData);
+          }
+        });
+      });
+    });
+  };
+
   const addImages = (rawImages) => {
     setImages(Array.from(rawImages));
   };
@@ -73,7 +100,7 @@ const AddHouseForm = () => {
   const removeImage = (name) => setImages((prevState) => prevState?.filter((img) => img.name !== name));
 
   const handleSend = (fields) => {
-    console.log({ fields });
+    sendHouseDataWithPhotos(images, fields);
   };
 
   const facilities = [
@@ -162,7 +189,7 @@ const AddHouseForm = () => {
           <TextField
             id="price"
             type="number"
-            defaultValue={0}
+            defaultValue={1}
             {...register('price')}
             label="Price"
             InputProps={{
