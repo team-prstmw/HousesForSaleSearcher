@@ -59,7 +59,7 @@ function ListOfHouses() {
         <Box component="div" className={styles.houseElement}>
           <h4>420 Baker St, London</h4>
           <p className={styles.price}>299,999£</p>
-          <img src="\src\assets\images\House.png" alt="House" />
+          <img src="/src/assets/images/House.png" alt="House" />
           <p className={styles.shortInfo}>2 bds 1 ba 1555 sqft - Apartament for sale</p>
           <Button className={styles.moreInfo}>more info</Button>
           <Checkbox
