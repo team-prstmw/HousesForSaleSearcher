@@ -56,19 +56,7 @@ function LoginForm({ changeStateFn }) {
   };
   return (
     <>
-      <Box
-        component="form"
-        onSubmit={handleSubmit(onSubmit)}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexWrap: 'nowrap',
-          alignContent: 'center',
-        }}
-        noValidate
-      >
+      <Box className={styles.form} component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
         <Stack spacing={4} className={styles.stack__wrapper}>
           <TextField
             id="outlined-textarea-email"
