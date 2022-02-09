@@ -13,7 +13,7 @@ Aplikację wykonali uczestnicy kursu przy pomocy mentora.
 -   [Patryk Jurczyk](https://github.com/PatrykJurczyk)
 -   [Wojciech Okularczyk](https://github.com/shadowas-py)
 
-## II. [DEMO]()
+## II. [DEMO](https://epic-lewin-83c1f7.netlify.app/)
 
 ## III. Opis projektu:
 Współlokator ciągle zajmuje łazienkę? Puszcza muzykę kiedy Ty próbujesz programować? W lodówce masz jedną półkę, a w pralce ciągle są czyjeś ubrania?
@@ -55,3 +55,13 @@ Następnie:
 yarn run dev
 ```
 Aplikacja będzie dostępna pod adresem `localhost:3000`
+
+## VIII. Wygląd
+
+Strona startowa
+
+Strona logowania
+
+Strona rejestracji
+
+Panel użytkownika
