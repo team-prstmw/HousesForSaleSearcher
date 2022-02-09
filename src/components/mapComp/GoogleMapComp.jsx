@@ -32,10 +32,10 @@ function Map() {
   );
 }
 
-export default function GoogleMapComp() {
+export default function GoogleMapComp(props) {
   const WrappedMap = withScriptjs(withGoogleMap(Map));
   return (
-    <div className={styles.googleMapContainer}>
+    <div className={styles.googleMapContainer} style={props.style}>
       <WrappedMap
         googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${API_KEY}`}
         loadingElement={<div style={{ height: '100%' }} />}

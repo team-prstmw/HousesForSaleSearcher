@@ -21,6 +21,7 @@ import * as yup from 'yup';
 import { create, storage } from '/src/firebase';
 import getRandomString from '/src/utils/getRandomString';
 
+import GoogleMapComp from '../mapComp/GoogleMapComp';
 import styles from './AddHouseForm.module.css';
 import FacilityCheckbox from './components/FacilityCheckbox/FacilityCheckbox';
 
@@ -290,6 +291,7 @@ const AddHouseForm = () => {
           {errors?.heating && <FormHelperText>{errors?.heating.message}</FormHelperText>}
         </FormControl>
       </div>
+      <GoogleMapComp style={{ height: '360px' }} />
       <Button
         variant="outlined"
         onClick={() => setMoreFacilitiesShown((prevState) => !prevState)}
