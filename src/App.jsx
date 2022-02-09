@@ -1,15 +1,42 @@
 import { ThemeProvider } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import RegisterLoginModal from '/src/components/RegisterLoginModal/RegisterLoginModal';
+import { readAll } from '/src/firebase';
+import SellHousePage from '/src/pages/SellHousePage/SellHousePage';
+import theme from '/src/theme/theme';
 
 import GoogleMapComp from './components/mapComp/GoogleMapComp';
 import HomePage from './pages/HomePage/HomePage';
-import SellHousePage from './pages/SellHousePage/SellHousePage';
-import theme from './theme/theme';
 
 function App() {
-  // const [LoggedIn, setLoggedIn] = React.useState(false);
+  const [houses, setHouses] = useState(null);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [LoggedIn, setLoggedIn] = useState(false);
+
+  const handleAsyncAction = async (asyncAction) => {
+    setLoading(() => true);
+    try {
+      await asyncAction();
+    } catch (caughtError) {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchHouses = async () => {
+    handleAsyncAction(async () => {
+      const fetchedHouses = await readAll('houses');
+      setHouses(() => fetchedHouses);
+    });
+  };
+
+  useEffect(() => {
+    fetchHouses();
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="App">
