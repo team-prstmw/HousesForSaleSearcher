@@ -6,7 +6,7 @@ import { Favorite, FavoriteBorder } from '@material-ui/icons';
 import DoneIcon from '@mui/icons-material/Done';
 import { Autocomplete, Box, Button, Checkbox, TextField } from '@mui/material';
 import Chip from '@mui/material/Chip';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import noPhoto from '/src/assets/images/nophoto.png';
 
@@ -18,19 +18,13 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 function ListOfHouses({ houses }) {
   const [sortType, setSortType] = useState(null);
   const [sortedHouses, setSortedHouses] = useState([]);
-  const houseList = useRef([]);
 
   const handleDelete = () => {
     setSortType(null);
   };
 
   useEffect(() => {
-    houseList.current = houses;
-    setSortedHouses(houseList.current);
-  }, [houses]);
-
-  useEffect(() => {
-    const itemArray = houseList.current.map((item) => item);
+    const itemArray = houses.map((item) => item);
     if (sortType === 'Payment (Low to High)') {
       const sorted = [...itemArray].sort((a, b) => a.price - b.price);
       setSortedHouses(sorted);
@@ -50,7 +44,7 @@ function ListOfHouses({ houses }) {
     if (sortType === null) {
       setSortedHouses(itemArray);
     }
-  }, [houseList, sortType]);
+  }, [houses, sortType]);
 
   return (
     <Box component="div" className={styles.housesComponent}>

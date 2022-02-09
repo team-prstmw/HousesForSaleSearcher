@@ -4,17 +4,44 @@
 /* eslint-disable import/no-unresolved */
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Footer from '/src/components/Footer/Footer';
 import Header from '/src/components/HeaderSection/Header/Header';
+import { readAll } from '/src/firebase';
 
 import ChangeView from './ChangeView/ChangeView';
 import ListOfHouses from './ListOfHouses/ListOfHouses';
 import MapHouses from './MapSide/MapSide';
 
-function HomePage({ houses }) {
+function HomePage() {
   const [toggleView, setToggleView] = useState(true);
+  const [houses, setHouses] = useState([]);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const handleAsyncAction = async (asyncAction) => {
+    setLoading(() => true);
+    try {
+      await asyncAction();
+    } catch (caughtError) {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchHouses = async () => {
+    handleAsyncAction(async () => {
+      const fetchedHouses = await readAll('houses');
+      setHouses(() => fetchedHouses);
+    });
+  };
+
+  useEffect(() => {
+    fetchHouses();
+  }, []);
+
   return (
     <Grid sx={{ display: 'flex', flexDirection: 'column' }} height="100vh">
       <Grid item xs={12} marginBottom="38px" sx={{ flexBasis: { xs: '0' } }}>
