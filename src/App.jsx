@@ -1,8 +1,7 @@
 import { ThemeProvider } from '@mui/material/styles';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { readAll } from '/src/firebase';
 import theme from '/src/theme/theme';
 
 import LoginProvider from './contexts/LoginProvider';
@@ -12,32 +11,7 @@ import AccountSettingsView from './pages/ProfilePage/views/AccountSettingsView/A
 import SellHouseView from './pages/ProfilePage/views/SellHouseView/SellHouseView';
 
 function App() {
-  const [houses, setHouses] = useState(null);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [LoggedIn, setLoggedIn] = useState(false);
-
-  const handleAsyncAction = async (asyncAction) => {
-    setLoading(() => true);
-    try {
-      await asyncAction();
-    } catch (caughtError) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchHouses = async () => {
-    handleAsyncAction(async () => {
-      const fetchedHouses = await readAll('houses');
-      setHouses(() => fetchedHouses);
-    });
-  };
-
-  useEffect(() => {
-    fetchHouses();
-  }, []);
 
   return (
     <BrowserRouter>
