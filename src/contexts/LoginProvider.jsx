@@ -8,6 +8,7 @@ const LoginProvider = ({ children }) => {
 
   const login = () => {
     setLoggedIn(true);
+    localStorage.setItem('isloggedIn', true);
   };
   const logout = () => {
     localStorage.clear();

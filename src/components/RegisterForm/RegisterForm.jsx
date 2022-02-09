@@ -11,16 +11,18 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/system/Box';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import styles from '/src/components/RegisterForm/RegisterForm.module.css';
+import LoginContext from '/src/contexts/LoginContext';
 import { registerSchema } from '/src/schemas/authSchemas';
 import { SIGN_UP_URL } from '/src/URLs';
 import { signInSignUp } from '/src/utils/auth';
 
 function RegisterForm(props) {
   const { fn, ...otherProps } = props;
+  const login = useContext(LoginContext);
   const [values, setValues] = useState({
     password: '',
     showPassword: false,
@@ -52,7 +54,7 @@ function RegisterForm(props) {
   };
 
   const onSubmit = ({ email, password }) => {
-    signInSignUp(email, password, SIGN_UP_URL, fn);
+    signInSignUp(email, password, SIGN_UP_URL, fn, login.loggedIn, login.login, login.logout);
   };
   return (
     <Box className={styles.registerForm__wrapper} component="form" onSubmit={handleSubmit(onSubmit)}>
