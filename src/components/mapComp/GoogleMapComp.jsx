@@ -3,6 +3,7 @@ import { GoogleMap, Marker, withGoogleMap, withScriptjs } from 'react-google-map
 
 import { readAll } from '../../utils/api/read';
 import getCoordsFromAddress from '../../utils/services/getCoordsFromAddress';
+import styles from './mapComponent.module.scss';
 
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
@@ -34,7 +35,7 @@ function Map() {
 export default function GoogleMapComp() {
   const WrappedMap = withScriptjs(withGoogleMap(Map));
   return (
-    <div style={{ width: '90%', height: '600px' }} sx={{}} className="google-map-container">
+    <div className={styles.googleMapContainer}>
       <WrappedMap
         googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${API_KEY}`}
         loadingElement={<div style={{ height: '100%' }} />}
