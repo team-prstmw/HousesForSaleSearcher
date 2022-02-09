@@ -43,7 +43,7 @@ function MapHouses() {
           <Typography className={styles.searchBy}>SEARCH BY</Typography>
         </ButtonSearch>
       </Box>
-      <GoogleMapComp />
+      <GoogleMapComp style={{ height: '600px', width: '90%', minWidth: '420px' }} />
     </Box>
   );
 }
