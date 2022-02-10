@@ -6,7 +6,6 @@ import { readAll } from '/src/firebase';
 import SellHousePage from '/src/pages/SellHousePage/SellHousePage';
 import theme from '/src/theme/theme';
 
-import GoogleMapComp from './components/mapComp/GoogleMapComp';
 import HomePage from './pages/HomePage/HomePage';
 
 function App() {
@@ -37,6 +36,10 @@ function App() {
     fetchHouses();
   }, []);
 
+  const MAP_INIT = `https://maps.googleapis.com/maps/api/js?key=${
+    import.meta.env.VITE_GOOGLE_API_KEY
+  }&callback=initMap`;
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -46,9 +49,9 @@ function App() {
             <Route path="/user" element={<h1>USER PAGE</h1>} />
             <Route path="/favorites" element={<h1>FAVORITES</h1>} />
             <Route path="/sell-house" element={<SellHousePage />} />
-            <Route path="/map" element={<GoogleMapComp />} />
           </Routes>
         </ThemeProvider>
+        <script async defer src={MAP_INIT} />
       </div>
     </BrowserRouter>
   );

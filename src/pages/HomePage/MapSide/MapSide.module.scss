@@ -26,6 +26,12 @@
   font-size: 35px !important;
 }
 
+.googleMapComp {
+  height: '600px';
+  width: '90%';
+  min-width: '420px';
+}
+
 @media screen and (min-width: $screen-xs) {
   .mapContainer form {
     width: 270px;
