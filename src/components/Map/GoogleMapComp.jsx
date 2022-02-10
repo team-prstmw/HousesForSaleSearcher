@@ -5,14 +5,14 @@ import getCoordsFromAddress from '/src/utils/services/getCoordsFromAddress';
 
 import styles from './GoogleMapComponent.module.scss';
 
-export default function GoogleMapComp(props) {
+export default function GoogleMapComp({ houses, style }) {
   function Map() {
     const [housesCoords, setHousesCoords] = useState([]);
 
     useEffect(() => {
       // eslint-disable-next-line no-undef
       const geocoder = new google.maps.Geocoder();
-      if (!housesCoords.length) getCoordsFromAddress(props.houses, geocoder, setHousesCoords);
+      if (!housesCoords.length) getCoordsFromAddress(houses, geocoder, setHousesCoords);
     }, [housesCoords.length]);
 
     return (
@@ -30,9 +30,10 @@ export default function GoogleMapComp(props) {
       </GoogleMap>
     );
   }
+
   const WrappedMap = withScriptjs(withGoogleMap(Map));
   return (
-    <div className={styles.googleMapContainer} style={props.style}>
+    <div className={styles.googleMapContainer} style={style}>
       <WrappedMap
         googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${
           import.meta.env.VITE_GOOGLE_API_KEY

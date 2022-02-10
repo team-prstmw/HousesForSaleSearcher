@@ -17,5 +17,4 @@ export default async function getCoordsFromAddress(response, geocoder, setHouseC
       }
     });
   });
-  return coordsList;
 }
