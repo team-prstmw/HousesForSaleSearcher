@@ -59,9 +59,16 @@ Aplikacja będzie dostępna pod adresem `localhost:3000`
 ## VIII. Wygląd
 
 Strona startowa
+![Strona startowa](https://ibb.co/gdT4JDn)
 
 Strona logowania
+![Strona logowania](https://ibb.co/L0Njn6H)
 
 Strona rejestracji
+![Strona rejestracji](https://ibb.co/7J10hFP)
 
 Panel użytkownika
+![Panel użytkownika](https://ibb.co/ggQrLpM)
+
+Wystawienie domu na sprzedaż
+![Wystawienie domu na sprzedaż](https://ibb.co/0DbtmZj)
