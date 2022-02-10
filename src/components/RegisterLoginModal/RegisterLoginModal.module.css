@@ -13,3 +13,10 @@
   display: flex;
   justify-content: center;
 }
+
+.closeButton {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  align-self: flex-end;
+}

@@ -1,15 +1,12 @@
-/* eslint-disable react/no-children-prop */
-/* eslint-disable no-shadow */
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-absolute-path */
-/* eslint-disable import/no-unresolved */
+import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 
-import mapError from '/src/utils/services/mapError';
+import mapError from '/src/utils/mapError';
 import LoginForm from '@/components/LoginForm/LoginForm';
 import RegisterForm from '@/components/RegisterForm/RegisterForm';
 import RegisterLoginHeader from '@/components/RegisterLoginHeader/RegisterLoginHeader';
@@ -36,16 +33,19 @@ function RegisterLoginModal() {
   const [state, setState] = useState('');
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setState('');
+    setOpen(false);
+  };
 
-  const changeState = (state) => {
-    setState(mapError(state));
+  const changeState = (stateToChange) => {
+    setState(mapError(stateToChange));
   };
 
   const handleChange = (event) => {
+    setState('');
     setChecked(event.target.checked);
   };
-
   return (
     <>
       <SignInButton
@@ -72,9 +72,16 @@ function RegisterLoginModal() {
             bgcolor: 'background.paper',
           }}
         >
-          <RegisterLoginHeader checked={checked} onChange={handleChange} />
-          {checked ? <RegisterForm fn={changeState} /> : <LoginForm fn={changeState} />}
-          {state ? <ActionAlert fn={setState} children={state} /> : null}
+          <IconButton aria-label="Close" className={styles.closeButton} onClick={handleClose}>
+            <CloseIcon />
+          </IconButton>
+          <RegisterLoginHeader checked={checked} onChange={handleChange} onClick={handleClose} state={state} />
+          {checked ? <RegisterForm changeStateFn={changeState} /> : <LoginForm changeStateFn={changeState} />}
+          {state === 'Success' ? (
+            <ActionAlert severity="success" onCloseAlertInfo={setState} children={state} />
+          ) : state ? (
+            <ActionAlert severity="error" onCloseAlertInfo={setState} children={state} />
+          ) : null}
         </Box>
       </Modal>
     </>
