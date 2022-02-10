@@ -12,16 +12,19 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
-import React from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import styles from '/src/components/LoginForm/LoginForm.module.css';
+import LoginContext from '/src/contexts/LoginContext';
 import { loginSchema } from '/src/schemas/authSchemas';
 import { RESET_PASSWORD, SIGN_IN_URL } from '/src/URLs';
 import { resetPassword, signInSignUp } from '/src/utils/auth';
 
 function LoginForm({ changeStateFn }) {
-  const [values, setValues] = React.useState({
+  const login = useContext(LoginContext);
+
+  const [values, setValues] = useState({
     password: '',
     showPassword: false,
   });
@@ -48,7 +51,7 @@ function LoginForm({ changeStateFn }) {
   };
 
   const onSubmit = ({ email, password }) => {
-    signInSignUp(email, password, SIGN_IN_URL, changeStateFn);
+    signInSignUp(email, password, SIGN_IN_URL, changeStateFn, login.loggedIn, login.login, login.logout);
   };
 
   const onReset = () => {

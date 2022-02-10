@@ -12,15 +12,17 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import styles from '/src/components/RegisterForm/RegisterForm.module.css';
+import LoginContext from '/src/contexts/LoginContext';
 import { registerSchema } from '/src/schemas/authSchemas';
 import { SIGN_UP_URL } from '/src/URLs';
 import { signInSignUp } from '/src/utils/auth';
 
 function RegisterForm({ changeStateFn }) {
+  const login = useContext(LoginContext);
   const [values, setValues] = useState({
     password: '',
     email: '',
@@ -48,7 +50,7 @@ function RegisterForm({ changeStateFn }) {
   };
 
   const onSubmit = ({ email, password }) => {
-    signInSignUp(email, password, SIGN_UP_URL, changeStateFn);
+    signInSignUp(email, password, SIGN_UP_URL, changeStateFn, login.loggedIn, login.login, login.logout);
   };
 
   return (
