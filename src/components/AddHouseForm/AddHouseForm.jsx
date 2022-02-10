@@ -18,10 +18,10 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
+import GoogleMapComp from '/src/components/Map/GoogleMapComp';
 import { create, storage } from '/src/firebase';
 import getRandomString from '/src/utils/getRandomString';
 
-import GoogleMapComp from '../mapComp/GoogleMapComp';
 import styles from './AddHouseForm.module.css';
 import FacilityCheckbox from './components/FacilityCheckbox/FacilityCheckbox';
 
@@ -182,6 +182,7 @@ const AddHouseForm = () => {
           />
         </span>
       </div>
+      <GoogleMapComp style={{ height: '360px', minWidth: '100%' }} />
       <div className={styles.formSection}>
         <Typography variant="h6" color="primary">
           Property Information
@@ -291,7 +292,6 @@ const AddHouseForm = () => {
           {errors?.heating && <FormHelperText>{errors?.heating.message}</FormHelperText>}
         </FormControl>
       </div>
-      <GoogleMapComp style={{ height: '360px' }} />
       <Button
         variant="outlined"
         onClick={() => setMoreFacilitiesShown((prevState) => !prevState)}

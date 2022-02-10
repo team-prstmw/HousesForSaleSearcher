@@ -10,9 +10,11 @@ export default function GoogleMapComp({ houses, style }) {
     const [housesCoords, setHousesCoords] = useState([]);
 
     useEffect(() => {
-      // eslint-disable-next-line no-undef
-      const geocoder = new google.maps.Geocoder();
-      if (!housesCoords.length) getCoordsFromAddress(houses, geocoder, setHousesCoords);
+      if (houses) {
+        // eslint-disable-next-line no-undef
+        const geocoder = new google.maps.Geocoder();
+        if (!housesCoords.length) getCoordsFromAddress(houses, geocoder, setHousesCoords);
+      }
     }, [housesCoords.length]);
 
     return (
