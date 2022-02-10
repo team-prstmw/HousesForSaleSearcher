@@ -5,6 +5,7 @@ import getCoordsFromAddress from '/src/utils/services/getCoordsFromAddress';
 
 import styles from './GoogleMapComponent.module.scss';
 
+// eslint-disable-next-line react/prop-types
 export default function GoogleMapComp({ houses, style }) {
   function Map() {
     const [housesCoords, setHousesCoords] = useState([]);
@@ -20,9 +21,15 @@ export default function GoogleMapComp({ houses, style }) {
         {housesCoords.map((coords) => {
           return (
             <Marker
+              className="pin"
               position={{
                 lat: coords[0],
                 lng: coords[1],
+              }}
+              icon={{
+                url: 'src/assets/icons/bungalow.svg',
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(13, 13),
               }}
             />
           );
