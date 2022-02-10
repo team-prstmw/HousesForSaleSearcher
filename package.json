@@ -4,7 +4,6 @@
   "private": true,
   "engines": {
     "node": "^14",
-    "npm": "please-use-yarn",
     "yarn": "3.0.2"
   },
   "volta": {
@@ -24,12 +23,13 @@
     "@hookform/resolvers": "2.8.5",
     "@material-ui/core": "4.12.3",
     "@material-ui/icons": "4.11.2",
-    "@mui/icons-material": "5.3.0",
+    "@mui/icons-material": "5.3.1",
     "@mui/material": "5.2.8",
     "@mui/styled-engine-sc": "5.1.0",
     "@mui/styles": "5.3.0",
     "firebase": "9.6.4",
     "normalize.css": "8.0.1",
+    "prop-types": "15.8.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-google-maps": "9.4.5",

@@ -1,17 +1,19 @@
 import makeRequest from '/src/utils/services/makeRequest';
 
-export const signInSignUp = async (email, password, signURL, changeState) => {
+export const resetPassword = async (email, signURL, changeState) => {
   const response = await makeRequest(signURL, {
     method: 'POST',
     body: JSON.stringify({
+      requestType: 'PASSWORD_RESET',
       email,
-      password,
-      returnSecureToken: true,
     }),
   });
   const data = await response.json();
-  if (!response.ok) {
+  if (response.ok) {
+    changeState('SUCCESS');
+  } else {
     changeState(data.error.message);
   }
+
   return data;
 };

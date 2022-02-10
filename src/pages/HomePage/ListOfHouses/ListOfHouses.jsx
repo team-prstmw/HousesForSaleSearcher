@@ -1,21 +1,50 @@
+/* eslint-disable import/no-absolute-path */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
 import DoneIcon from '@mui/icons-material/Done';
 import { Autocomplete, Box, Button, Checkbox, TextField } from '@mui/material';
 import Chip from '@mui/material/Chip';
-import React from 'react';
+import { useEffect, useState } from 'react';
+
+import noPhoto from '/src/assets/images/nophoto.png';
 
 import styles from './ListOfHouses.module.scss';
 
-const options = ['Option 1', 'Option 2'];
+const options = ['Payment (Low to High)', 'Payment (High to Low)', 'A-Z', 'Z-A'];
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-function ListOfHouses() {
-  const [value, setValue] = React.useState(null);
+function ListOfHouses({ houses }) {
+  const [sortType, setSortType] = useState(null);
+  const [sortedHouses, setSortedHouses] = useState([]);
 
   const handleDelete = () => {
-    setValue(null);
+    setSortType(null);
   };
+
+  useEffect(() => {
+    const itemArray = houses.map((item) => item);
+    if (sortType === 'Payment (Low to High)') {
+      const sorted = [...itemArray].sort((a, b) => a.price - b.price);
+      setSortedHouses(sorted);
+    }
+    if (sortType === 'Payment (High to Low)') {
+      const sorted = [...itemArray].sort((a, b) => b.price - a.price);
+      setSortedHouses(sorted);
+    }
+    if (sortType === 'A-Z') {
+      const sorted = [...itemArray].sort((a, b) => a.city.localeCompare(b.city));
+      setSortedHouses(sorted);
+    }
+    if (sortType === 'Z-A') {
+      const sorted = [...itemArray].sort((a, b) => b.city.localeCompare(a.city));
+      setSortedHouses(sorted);
+    }
+    if (sortType === null) {
+      setSortedHouses(itemArray);
+    }
+  }, [houses, sortType]);
 
   return (
     <Box component="div" className={styles.housesComponent}>
@@ -25,9 +54,9 @@ function ListOfHouses() {
           <Autocomplete
             className={styles.options}
             disableClearable
-            value={value}
+            value={sortType}
             onChange={(event, newValue) => {
-              setValue(newValue);
+              setSortType(newValue);
             }}
             options={options}
             renderInput={(params) => <TextField {...params} />}
@@ -35,69 +64,32 @@ function ListOfHouses() {
         </div>
         <Chip
           icon={<DoneIcon />}
-          sx={{ display: value !== null ? '' : 'none' }}
-          label={`${value !== null ? value : ''}`}
+          sx={{ display: sortType !== null ? '' : 'none' }}
+          label={`${sortType !== null ? sortType : ''}`}
           onDelete={handleDelete}
         />
       </Box>
-
       <Box component="div" className={styles.housesList}>
-        <Box component="div" className={styles.houseElement}>
-          <h4>420 Baker St, London</h4>
-          <p className={styles.price}>299,999£</p>
-          <img src="\src\assets\images\House.png" alt="House" />
-          <p className={styles.shortInfo}>2 bds 1 ba 1555 sqft - Apartament for sale</p>
-          <Button className={styles.moreInfo}>more info</Button>
-          <Checkbox
-            color="warning"
-            {...label}
-            icon={<FavoriteBorder />}
-            checkedIcon={<Favorite />}
-            className={styles.icon}
-          />
-        </Box>
-        <Box component="div" className={styles.houseElement}>
-          <h4>420 Baker St, London</h4>
-          <p className={styles.price}>299,999£</p>
-          <img src="\src\assets\images\House.png" alt="House" />
-          <p className={styles.shortInfo}>2 bds 1 ba 1555 sqft - Apartament for sale</p>
-          <Button className={styles.moreInfo}>more info</Button>
-          <Checkbox
-            color="warning"
-            {...label}
-            icon={<FavoriteBorder />}
-            checkedIcon={<Favorite />}
-            className={styles.icon}
-          />
-        </Box>
-        <Box component="div" className={styles.houseElement}>
-          <h4>420 Baker St, London</h4>
-          <p className={styles.price}>299,999£</p>
-          <img src="\src\assets\images\House.png" alt="House" />
-          <p className={styles.shortInfo}>2 bds 1 ba 1555 sqft - Apartament for sale</p>
-          <Button className={styles.moreInfo}>more info</Button>
-          <Checkbox
-            color="warning"
-            {...label}
-            icon={<FavoriteBorder />}
-            checkedIcon={<Favorite />}
-            className={styles.icon}
-          />
-        </Box>
-        <Box component="div" className={styles.houseElement}>
-          <h4>420 Baker St, London</h4>
-          <p className={styles.price}>299,999£</p>
-          <img src="\src\assets\images\House.png" alt="House" />
-          <p className={styles.shortInfo}>2 bds 1 ba 1555 sqft - Apartament for sale</p>
-          <Button className={styles.moreInfo}>more info</Button>
-          <Checkbox
-            color="warning"
-            {...label}
-            icon={<FavoriteBorder />}
-            checkedIcon={<Favorite />}
-            className={styles.icon}
-          />
-        </Box>
+        {sortedHouses.map((item, i) => (
+          <Box component="div" className={styles.houseElement} key={i.toString()}>
+            <h4>
+              {item.city}, {item.streetName} {item.streetNumber}
+            </h4>
+            <p className={styles.price}>
+              {item.price}zł/m<sup>2</sup>
+            </p>
+            <img src={item.photo_0 ? item.photo_0 : noPhoto} alt="House" />
+            <p className={styles.shortInfo}>{item.descriptionField}</p>
+            <Button className={styles.moreInfo}>more info</Button>
+            <Checkbox
+              color="warning"
+              {...label}
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+              className={styles.icon}
+            />
+          </Box>
+        ))}
       </Box>
     </Box>
   );
