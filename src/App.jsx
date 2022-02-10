@@ -13,6 +13,10 @@ import SellHouseView from './pages/ProfilePage/views/SellHouseView/SellHouseView
 function App() {
   const [LoggedIn, setLoggedIn] = useState(false);
 
+  const MAP_INIT = `https://maps.googleapis.com/maps/api/js?key=${
+    import.meta.env.VITE_GOOGLE_API_KEY
+  }&callback=initMap`;
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -29,6 +33,7 @@ function App() {
             </Routes>
           </LoginProvider>
         </ThemeProvider>
+        <script async defer src={MAP_INIT} />
       </div>
     </BrowserRouter>
   );
