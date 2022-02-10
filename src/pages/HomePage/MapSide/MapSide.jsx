@@ -21,7 +21,7 @@ const ButtonSearch = styled(Button)(({ theme }) => ({
   },
 }));
 
-function MapHouses() {
+function MapHouses({ houses }) {
   return (
     <Box component="div" className={styles.mapContainer}>
       <Box component="form">
@@ -44,7 +44,7 @@ function MapHouses() {
           <Typography className={styles.searchBy}>SEARCH BY</Typography>
         </ButtonSearch>
       </Box>
-      <GoogleMapComp className="googleMapComp" />
+      <GoogleMapComp className="googleMapComp" houses={houses} />
     </Box>
   );
 }

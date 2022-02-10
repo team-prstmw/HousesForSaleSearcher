@@ -13,28 +13,6 @@ import SellHouseView from './pages/ProfilePage/views/SellHouseView/SellHouseView
 function App() {
   const [LoggedIn, setLoggedIn] = useState(false);
 
-  const handleAsyncAction = async (asyncAction) => {
-    setLoading(() => true);
-    try {
-      await asyncAction();
-    } catch (caughtError) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchHouses = async () => {
-    handleAsyncAction(async () => {
-      const fetchedHouses = await readAll('houses');
-      setHouses(() => fetchedHouses);
-    });
-  };
-
-  useEffect(() => {
-    fetchHouses();
-  }, []);
-
   const MAP_INIT = `https://maps.googleapis.com/maps/api/js?key=${
     import.meta.env.VITE_GOOGLE_API_KEY
   }&callback=initMap`;

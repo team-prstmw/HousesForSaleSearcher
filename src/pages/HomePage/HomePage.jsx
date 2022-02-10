@@ -57,7 +57,7 @@ function HomePage() {
         }}
       >
         <Grid item xs={12} md={6} sx={{ display: { xs: toggleView ? 'block' : 'none', md: 'block' } }}>
-          <MapHouses />
+          <MapHouses houses={houses} />
         </Grid>
         <Grid item xs={12} md={6} sx={{ display: { xs: toggleView ? 'none' : 'block', md: 'block' } }}>
           <ListOfHouses houses={houses} />
