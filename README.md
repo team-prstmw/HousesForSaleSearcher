@@ -58,17 +58,13 @@ Aplikacja będzie dostępna pod adresem `localhost:3000`
 
 ## VIII. Wygląd
 
-Strona startowa
-![Strona startowa](https://ibb.co/gdT4JDn)
-
-Strona logowania
-![Strona logowania](https://ibb.co/L0Njn6H)
-
-Strona rejestracji
-![Strona rejestracji](https://ibb.co/7J10hFP)
-
-Panel użytkownika
-![Panel użytkownika](https://ibb.co/ggQrLpM)
-
-Wystawienie domu na sprzedaż
-![Wystawienie domu na sprzedaż](https://ibb.co/0DbtmZj)
+-   Strona startowa
+![Strona startowa](https://i.ibb.co/68PXF4d/index-Page.png)
+-   Strona logowania  
+![Strona logowania](https://i.ibb.co/XWY0SpM/login-Form.png)
+-   Strona rejestracji  
+![Strona rejestracji](https://i.ibb.co/0jGz53T/register-Form.png)
+-   Panel użytkownika  
+![Panel użytkownika](https://i.ibb.co/12B0t5f/userPage.png)
+-   Wystawienie domu na sprzedaż  
+![Wystawienie domu na sprzedaż](https://i.ibb.co/2n4NWP7/sell-House-Form.png)
