@@ -1,12 +1,11 @@
-# Houses For Sale Searcher - CodersCamp 2021/22 Projekt React
-## I. Zespół projektowy
+# Houses For Sale Searcher - CodersCamp 2021/22 Project React
+## I. Team
 
-Zespół pracował w ramach kursu [CodersCamp](https://coderscamp.pl/).
-Aplikację wykonali uczestnicy kursu przy pomocy mentora.
+The team worked as part of the [CodersCamp](https://coderscamp.pl/) course. The application was made by the course participants with the help of a mentor.
 
 **Mentor**: [Filip Hałoń](https://github.com/FilipHalon)
 
-**Uczestnicy**:
+**Participants**:
 
 -   [Marta Goniszewska](https://github.com/mgoniszewska)
 -   [Tomasz Ikert](https://github.com/ike-tom)
@@ -15,17 +14,17 @@ Aplikację wykonali uczestnicy kursu przy pomocy mentora.
 
 ## II. [DEMO](https://epic-lewin-83c1f7.netlify.app/)
 
-## III. Opis projektu:
-Współlokator ciągle zajmuje łazienkę? Puszcza muzykę kiedy Ty próbujesz programować? W lodówce masz jedną półkę, a w pralce ciągle są czyjeś ubrania?
-Koniec z wynajmowaniem! Znajdź dom o jakim zawsze marzyłeś w przystępnej cenie!
+## III. Project description
+Does the roommate still occupy the bathroom? Does he play music when you're trying to program? 
+You have one shelf in your refrigerator, and there are still somebody's clothes in the washing machine? No more renting! Find the house you've always dreamed of at an affordable price!
 
-## IV. Wykorzystane technologie:
+## IV. Tech stack
 - React
 - JavaScript
 - HTML
 - CSS - SCSS + Material UI
 
-## V. Narzędzia z jakimi pracowaliśmy:
+## V. Tools
 - Firebase
 - Jira
 - Figma
@@ -34,37 +33,34 @@ Koniec z wynajmowaniem! Znajdź dom o jakim zawsze marzyłeś w przystępnej cen
 
 ### [Design](https://www.figma.com/file/ZkiIq0vudllZEto6pU2UQh/Untitled?node-id=5%3A25)
 
-## VI. Organizacja pracy
+## VI. Workflow
 
-Organizacja pracy zespołu oraz code review były przeprowadzane w serwisie GitHub.
-Zadania opisano oraz rozdzielano w oprogramowaniu Jira.
-Do daily korzystaliśmy z Google Meet. Daily były przeprowadzane w każdy wtorek, czwartek oraz niedzielę.
-Podczas codziennej komunikacji korzystano z Discorda.
+The organization of the team's work and code review were carried out on GitHub. Tasks are described and distributed in the Jira. We used Google Meet for meetings. Meetings were conducted every Tuesday, Thursday, and Sunday. Discord was used in everyday communication.
 
-## VII. Uruchomienie projektu
-Do uruchomienia projektu na maszynie lokalnej należy wpisać w terminalu:
+## VII. Setup
+To run the project on the local machine, type in the terminal:
 ```bash
 git clone git@github.com:team-prstmw/HousesForSaleSearcher.git
 ```
-Następnie, aby zainstalować moduły, należy wpisac:
+Then, to install the modules, type:
 ```bash
 yarn install
 ```
-Następnie:
+Then:
 ```bash
 yarn run dev
 ```
-Aplikacja będzie dostępna pod adresem `localhost:3000`
+The application will be available at `localhost:3000`
 
-## VIII. Wygląd
+## VIII. Illustrations
 
--   Strona startowa
-![Strona startowa](https://i.ibb.co/68PXF4d/index-Page.png)
--   Strona logowania  
-![Strona logowania](https://i.ibb.co/XWY0SpM/login-Form.png)
--   Strona rejestracji  
-![Strona rejestracji](https://i.ibb.co/0jGz53T/register-Form.png)
--   Panel użytkownika  
-![Panel użytkownika](https://i.ibb.co/12B0t5f/userPage.png)
--   Wystawienie domu na sprzedaż  
-![Wystawienie domu na sprzedaż](https://i.ibb.co/2n4NWP7/sell-House-Form.png)
+-   Home Page
+![Home Page](https://i.ibb.co/68PXF4d/index-Page.png)
+-   Login Page   
+![Login Page](https://i.ibb.co/XWY0SpM/login-Form.png)
+-   Registration Page  
+![Registration Page](https://i.ibb.co/0jGz53T/register-Form.png)
+-   User Panel  
+![User Panel](https://i.ibb.co/12B0t5f/userPage.png)
+-   Sell House Form  
+![Sell House Form](https://i.ibb.co/2n4NWP7/sell-House-Form.png)
